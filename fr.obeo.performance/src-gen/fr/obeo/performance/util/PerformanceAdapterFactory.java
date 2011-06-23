@@ -76,8 +76,32 @@ public class PerformanceAdapterFactory extends AdapterFactoryImpl {
     protected PerformanceSwitch<Adapter> modelSwitch =
         new PerformanceSwitch<Adapter>() {
             @Override
+            public Adapter caseSystemUnderTest(SystemUnderTest object) {
+                return createSystemUnderTestAdapter();
+            }
+            @Override
+            public Adapter caseEnvironment(Environment object) {
+                return createEnvironmentAdapter();
+            }
+            @Override
+            public Adapter caseScenario(Scenario object) {
+                return createScenarioAdapter();
+            }
+            @Override
+            public Adapter caseProperty(Property object) {
+                return createPropertyAdapter();
+            }
+            @Override
+            public Adapter casePerformanceTest(PerformanceTest object) {
+                return createPerformanceTestAdapter();
+            }
+            @Override
             public Adapter caseTestResult(TestResult object) {
                 return createTestResultAdapter();
+            }
+            @Override
+            public Adapter caseMeasure(Measure object) {
+                return createMeasureAdapter();
             }
             @Override
             public Adapter defaultCase(EObject object) {
@@ -100,6 +124,76 @@ public class PerformanceAdapterFactory extends AdapterFactoryImpl {
 
 
     /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.SystemUnderTest <em>System Under Test</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.SystemUnderTest
+     * @generated
+     */
+    public Adapter createSystemUnderTestAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.Environment <em>Environment</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.Environment
+     * @generated
+     */
+    public Adapter createEnvironmentAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.Scenario <em>Scenario</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.Scenario
+     * @generated
+     */
+    public Adapter createScenarioAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.Property <em>Property</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.Property
+     * @generated
+     */
+    public Adapter createPropertyAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.PerformanceTest <em>Test</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.PerformanceTest
+     * @generated
+     */
+    public Adapter createPerformanceTestAdapter() {
+        return null;
+    }
+
+    /**
      * Creates a new adapter for an object of class '{@link fr.obeo.performance.TestResult <em>Test Result</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
@@ -110,6 +204,20 @@ public class PerformanceAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createTestResultAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.Measure <em>Measure</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.Measure
+     * @generated
+     */
+    public Adapter createMeasureAdapter() {
         return null;
     }
 

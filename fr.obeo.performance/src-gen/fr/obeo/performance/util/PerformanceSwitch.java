@@ -91,14 +91,125 @@ public class PerformanceSwitch<T> {
      */
     protected T doSwitch(int classifierID, EObject theEObject) {
         switch (classifierID) {
+            case PerformancePackage.SYSTEM_UNDER_TEST: {
+                SystemUnderTest systemUnderTest = (SystemUnderTest)theEObject;
+                T result = caseSystemUnderTest(systemUnderTest);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case PerformancePackage.ENVIRONMENT: {
+                Environment environment = (Environment)theEObject;
+                T result = caseEnvironment(environment);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case PerformancePackage.SCENARIO: {
+                Scenario scenario = (Scenario)theEObject;
+                T result = caseScenario(scenario);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case PerformancePackage.PROPERTY: {
+                Property property = (Property)theEObject;
+                T result = caseProperty(property);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case PerformancePackage.PERFORMANCE_TEST: {
+                PerformanceTest performanceTest = (PerformanceTest)theEObject;
+                T result = casePerformanceTest(performanceTest);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             case PerformancePackage.TEST_RESULT: {
                 TestResult testResult = (TestResult)theEObject;
                 T result = caseTestResult(testResult);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
+            case PerformancePackage.MEASURE: {
+                Measure measure = (Measure)theEObject;
+                T result = caseMeasure(measure);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
             default: return defaultCase(theEObject);
         }
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>System Under Test</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>System Under Test</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseSystemUnderTest(SystemUnderTest object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Environment</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Environment</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseEnvironment(Environment object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Scenario</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Scenario</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseScenario(Scenario object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Property</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseProperty(Property object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Test</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Test</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T casePerformanceTest(PerformanceTest object) {
+        return null;
     }
 
     /**
@@ -113,6 +224,21 @@ public class PerformanceSwitch<T> {
      * @generated
      */
     public T caseTestResult(TestResult object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Measure</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Measure</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseMeasure(Measure object) {
         return null;
     }
 

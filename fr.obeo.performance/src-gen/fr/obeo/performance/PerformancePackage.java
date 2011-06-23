@@ -10,8 +10,11 @@
  */
 package fr.obeo.performance;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -62,6 +65,200 @@ public interface PerformancePackage extends EPackage {
     PerformancePackage eINSTANCE = fr.obeo.performance.impl.PerformancePackageImpl.init();
 
     /**
+     * The meta object id for the '{@link fr.obeo.performance.impl.SystemUnderTestImpl <em>System Under Test</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.performance.impl.SystemUnderTestImpl
+     * @see fr.obeo.performance.impl.PerformancePackageImpl#getSystemUnderTest()
+     * @generated
+     */
+    int SYSTEM_UNDER_TEST = 0;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SYSTEM_UNDER_TEST__NAME = 0;
+
+    /**
+     * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SYSTEM_UNDER_TEST__PROPERTIES = 1;
+
+    /**
+     * The number of structural features of the '<em>System Under Test</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SYSTEM_UNDER_TEST_FEATURE_COUNT = 2;
+
+    /**
+     * The meta object id for the '{@link fr.obeo.performance.impl.EnvironmentImpl <em>Environment</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.performance.impl.EnvironmentImpl
+     * @see fr.obeo.performance.impl.PerformancePackageImpl#getEnvironment()
+     * @generated
+     */
+    int ENVIRONMENT = 1;
+
+    /**
+     * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ENVIRONMENT__PROPERTIES = 0;
+
+    /**
+     * The number of structural features of the '<em>Environment</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int ENVIRONMENT_FEATURE_COUNT = 1;
+
+    /**
+     * The meta object id for the '{@link fr.obeo.performance.impl.ScenarioImpl <em>Scenario</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.performance.impl.ScenarioImpl
+     * @see fr.obeo.performance.impl.PerformancePackageImpl#getScenario()
+     * @generated
+     */
+    int SCENARIO = 2;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCENARIO__NAME = 0;
+
+    /**
+     * The feature id for the '<em><b>Description</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCENARIO__DESCRIPTION = 1;
+
+    /**
+     * The feature id for the '<em><b>Input Properties</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCENARIO__INPUT_PROPERTIES = 2;
+
+    /**
+     * The number of structural features of the '<em>Scenario</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int SCENARIO_FEATURE_COUNT = 3;
+
+    /**
+     * The meta object id for the '{@link fr.obeo.performance.impl.PropertyImpl <em>Property</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.performance.impl.PropertyImpl
+     * @see fr.obeo.performance.impl.PerformancePackageImpl#getProperty()
+     * @generated
+     */
+    int PROPERTY = 3;
+
+    /**
+     * The feature id for the '<em><b>Key</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROPERTY__KEY = 0;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROPERTY__VALUE = 1;
+
+    /**
+     * The number of structural features of the '<em>Property</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PROPERTY_FEATURE_COUNT = 2;
+
+    /**
+     * The meta object id for the '{@link fr.obeo.performance.impl.PerformanceTestImpl <em>Test</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.performance.impl.PerformanceTestImpl
+     * @see fr.obeo.performance.impl.PerformancePackageImpl#getPerformanceTest()
+     * @generated
+     */
+    int PERFORMANCE_TEST = 4;
+
+    /**
+     * The feature id for the '<em><b>Sut</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PERFORMANCE_TEST__SUT = 0;
+
+    /**
+     * The feature id for the '<em><b>Environment</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PERFORMANCE_TEST__ENVIRONMENT = 1;
+
+    /**
+     * The feature id for the '<em><b>Results</b></em>' containment reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PERFORMANCE_TEST__RESULTS = 2;
+
+    /**
+     * The number of structural features of the '<em>Test</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int PERFORMANCE_TEST_FEATURE_COUNT = 3;
+
+    /**
      * The meta object id for the '{@link fr.obeo.performance.impl.TestResultImpl <em>Test Result</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -69,7 +266,25 @@ public interface PerformancePackage extends EPackage {
      * @see fr.obeo.performance.impl.PerformancePackageImpl#getTestResult()
      * @generated
      */
-    int TEST_RESULT = 0;
+    int TEST_RESULT = 5;
+
+    /**
+     * The feature id for the '<em><b>Scenario</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TEST_RESULT__SCENARIO = 0;
+
+    /**
+     * The feature id for the '<em><b>Performance</b></em>' reference list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int TEST_RESULT__PERFORMANCE = 1;
 
     /**
      * The number of structural features of the '<em>Test Result</em>' class.
@@ -78,8 +293,236 @@ public interface PerformancePackage extends EPackage {
      * @generated
      * @ordered
      */
-    int TEST_RESULT_FEATURE_COUNT = 0;
+    int TEST_RESULT_FEATURE_COUNT = 2;
 
+
+    /**
+     * The meta object id for the '{@link fr.obeo.performance.impl.MeasureImpl <em>Measure</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.performance.impl.MeasureImpl
+     * @see fr.obeo.performance.impl.PerformancePackageImpl#getMeasure()
+     * @generated
+     */
+    int MEASURE = 6;
+
+    /**
+     * The feature id for the '<em><b>Name</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MEASURE__NAME = 0;
+
+    /**
+     * The feature id for the '<em><b>Dimension</b></em>' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MEASURE__DIMENSION = 1;
+
+    /**
+     * The feature id for the '<em><b>Value</b></em>' attribute list.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MEASURE__VALUE = 2;
+
+    /**
+     * The number of structural features of the '<em>Measure</em>' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     * @ordered
+     */
+    int MEASURE_FEATURE_COUNT = 3;
+
+    /**
+     * The meta object id for the '{@link fr.obeo.performance.Dimension <em>Dimension</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see fr.obeo.performance.Dimension
+     * @see fr.obeo.performance.impl.PerformancePackageImpl#getDimension()
+     * @generated
+     */
+    int DIMENSION = 7;
+
+
+    /**
+     * Returns the meta object for class '{@link fr.obeo.performance.SystemUnderTest <em>System Under Test</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>System Under Test</em>'.
+     * @see fr.obeo.performance.SystemUnderTest
+     * @generated
+     */
+    EClass getSystemUnderTest();
+
+    /**
+     * Returns the meta object for the attribute '{@link fr.obeo.performance.SystemUnderTest#getName <em>Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Name</em>'.
+     * @see fr.obeo.performance.SystemUnderTest#getName()
+     * @see #getSystemUnderTest()
+     * @generated
+     */
+    EAttribute getSystemUnderTest_Name();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link fr.obeo.performance.SystemUnderTest#getProperties <em>Properties</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Properties</em>'.
+     * @see fr.obeo.performance.SystemUnderTest#getProperties()
+     * @see #getSystemUnderTest()
+     * @generated
+     */
+    EReference getSystemUnderTest_Properties();
+
+    /**
+     * Returns the meta object for class '{@link fr.obeo.performance.Environment <em>Environment</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Environment</em>'.
+     * @see fr.obeo.performance.Environment
+     * @generated
+     */
+    EClass getEnvironment();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link fr.obeo.performance.Environment#getProperties <em>Properties</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Properties</em>'.
+     * @see fr.obeo.performance.Environment#getProperties()
+     * @see #getEnvironment()
+     * @generated
+     */
+    EReference getEnvironment_Properties();
+
+    /**
+     * Returns the meta object for class '{@link fr.obeo.performance.Scenario <em>Scenario</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Scenario</em>'.
+     * @see fr.obeo.performance.Scenario
+     * @generated
+     */
+    EClass getScenario();
+
+    /**
+     * Returns the meta object for the attribute '{@link fr.obeo.performance.Scenario#getName <em>Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Name</em>'.
+     * @see fr.obeo.performance.Scenario#getName()
+     * @see #getScenario()
+     * @generated
+     */
+    EAttribute getScenario_Name();
+
+    /**
+     * Returns the meta object for the attribute '{@link fr.obeo.performance.Scenario#getDescription <em>Description</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Description</em>'.
+     * @see fr.obeo.performance.Scenario#getDescription()
+     * @see #getScenario()
+     * @generated
+     */
+    EAttribute getScenario_Description();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link fr.obeo.performance.Scenario#getInputProperties <em>Input Properties</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Input Properties</em>'.
+     * @see fr.obeo.performance.Scenario#getInputProperties()
+     * @see #getScenario()
+     * @generated
+     */
+    EReference getScenario_InputProperties();
+
+    /**
+     * Returns the meta object for class '{@link fr.obeo.performance.Property <em>Property</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Property</em>'.
+     * @see fr.obeo.performance.Property
+     * @generated
+     */
+    EClass getProperty();
+
+    /**
+     * Returns the meta object for the attribute '{@link fr.obeo.performance.Property#getKey <em>Key</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Key</em>'.
+     * @see fr.obeo.performance.Property#getKey()
+     * @see #getProperty()
+     * @generated
+     */
+    EAttribute getProperty_Key();
+
+    /**
+     * Returns the meta object for the attribute '{@link fr.obeo.performance.Property#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Value</em>'.
+     * @see fr.obeo.performance.Property#getValue()
+     * @see #getProperty()
+     * @generated
+     */
+    EAttribute getProperty_Value();
+
+    /**
+     * Returns the meta object for class '{@link fr.obeo.performance.PerformanceTest <em>Test</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Test</em>'.
+     * @see fr.obeo.performance.PerformanceTest
+     * @generated
+     */
+    EClass getPerformanceTest();
+
+    /**
+     * Returns the meta object for the containment reference '{@link fr.obeo.performance.PerformanceTest#getSut <em>Sut</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Sut</em>'.
+     * @see fr.obeo.performance.PerformanceTest#getSut()
+     * @see #getPerformanceTest()
+     * @generated
+     */
+    EReference getPerformanceTest_Sut();
+
+    /**
+     * Returns the meta object for the containment reference '{@link fr.obeo.performance.PerformanceTest#getEnvironment <em>Environment</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Environment</em>'.
+     * @see fr.obeo.performance.PerformanceTest#getEnvironment()
+     * @see #getPerformanceTest()
+     * @generated
+     */
+    EReference getPerformanceTest_Environment();
+
+    /**
+     * Returns the meta object for the containment reference list '{@link fr.obeo.performance.PerformanceTest#getResults <em>Results</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference list '<em>Results</em>'.
+     * @see fr.obeo.performance.PerformanceTest#getResults()
+     * @see #getPerformanceTest()
+     * @generated
+     */
+    EReference getPerformanceTest_Results();
 
     /**
      * Returns the meta object for class '{@link fr.obeo.performance.TestResult <em>Test Result</em>}'.
@@ -90,6 +533,81 @@ public interface PerformancePackage extends EPackage {
      * @generated
      */
     EClass getTestResult();
+
+    /**
+     * Returns the meta object for the containment reference '{@link fr.obeo.performance.TestResult#getScenario <em>Scenario</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the containment reference '<em>Scenario</em>'.
+     * @see fr.obeo.performance.TestResult#getScenario()
+     * @see #getTestResult()
+     * @generated
+     */
+    EReference getTestResult_Scenario();
+
+    /**
+     * Returns the meta object for the reference list '{@link fr.obeo.performance.TestResult#getPerformance <em>Performance</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the reference list '<em>Performance</em>'.
+     * @see fr.obeo.performance.TestResult#getPerformance()
+     * @see #getTestResult()
+     * @generated
+     */
+    EReference getTestResult_Performance();
+
+    /**
+     * Returns the meta object for class '{@link fr.obeo.performance.Measure <em>Measure</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for class '<em>Measure</em>'.
+     * @see fr.obeo.performance.Measure
+     * @generated
+     */
+    EClass getMeasure();
+
+    /**
+     * Returns the meta object for the attribute '{@link fr.obeo.performance.Measure#getName <em>Name</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Name</em>'.
+     * @see fr.obeo.performance.Measure#getName()
+     * @see #getMeasure()
+     * @generated
+     */
+    EAttribute getMeasure_Name();
+
+    /**
+     * Returns the meta object for the attribute '{@link fr.obeo.performance.Measure#getDimension <em>Dimension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute '<em>Dimension</em>'.
+     * @see fr.obeo.performance.Measure#getDimension()
+     * @see #getMeasure()
+     * @generated
+     */
+    EAttribute getMeasure_Dimension();
+
+    /**
+     * Returns the meta object for the attribute list '{@link fr.obeo.performance.Measure#getValue <em>Value</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for the attribute list '<em>Value</em>'.
+     * @see fr.obeo.performance.Measure#getValue()
+     * @see #getMeasure()
+     * @generated
+     */
+    EAttribute getMeasure_Value();
+
+    /**
+     * Returns the meta object for enum '{@link fr.obeo.performance.Dimension <em>Dimension</em>}'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return the meta object for enum '<em>Dimension</em>'.
+     * @see fr.obeo.performance.Dimension
+     * @generated
+     */
+    EEnum getDimension();
 
     /**
      * Returns the factory that creates the instances of the model.
@@ -114,6 +632,128 @@ public interface PerformancePackage extends EPackage {
      */
     interface Literals {
         /**
+         * The meta object literal for the '{@link fr.obeo.performance.impl.SystemUnderTestImpl <em>System Under Test</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see fr.obeo.performance.impl.SystemUnderTestImpl
+         * @see fr.obeo.performance.impl.PerformancePackageImpl#getSystemUnderTest()
+         * @generated
+         */
+        EClass SYSTEM_UNDER_TEST = eINSTANCE.getSystemUnderTest();
+        /**
+         * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute SYSTEM_UNDER_TEST__NAME = eINSTANCE.getSystemUnderTest_Name();
+        /**
+         * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference SYSTEM_UNDER_TEST__PROPERTIES = eINSTANCE.getSystemUnderTest_Properties();
+        /**
+         * The meta object literal for the '{@link fr.obeo.performance.impl.EnvironmentImpl <em>Environment</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see fr.obeo.performance.impl.EnvironmentImpl
+         * @see fr.obeo.performance.impl.PerformancePackageImpl#getEnvironment()
+         * @generated
+         */
+        EClass ENVIRONMENT = eINSTANCE.getEnvironment();
+        /**
+         * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference ENVIRONMENT__PROPERTIES = eINSTANCE.getEnvironment_Properties();
+        /**
+         * The meta object literal for the '{@link fr.obeo.performance.impl.ScenarioImpl <em>Scenario</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see fr.obeo.performance.impl.ScenarioImpl
+         * @see fr.obeo.performance.impl.PerformancePackageImpl#getScenario()
+         * @generated
+         */
+        EClass SCENARIO = eINSTANCE.getScenario();
+        /**
+         * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute SCENARIO__NAME = eINSTANCE.getScenario_Name();
+        /**
+         * The meta object literal for the '<em><b>Description</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute SCENARIO__DESCRIPTION = eINSTANCE.getScenario_Description();
+        /**
+         * The meta object literal for the '<em><b>Input Properties</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference SCENARIO__INPUT_PROPERTIES = eINSTANCE.getScenario_InputProperties();
+        /**
+         * The meta object literal for the '{@link fr.obeo.performance.impl.PropertyImpl <em>Property</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see fr.obeo.performance.impl.PropertyImpl
+         * @see fr.obeo.performance.impl.PerformancePackageImpl#getProperty()
+         * @generated
+         */
+        EClass PROPERTY = eINSTANCE.getProperty();
+        /**
+         * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute PROPERTY__KEY = eINSTANCE.getProperty_Key();
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute PROPERTY__VALUE = eINSTANCE.getProperty_Value();
+        /**
+         * The meta object literal for the '{@link fr.obeo.performance.impl.PerformanceTestImpl <em>Test</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see fr.obeo.performance.impl.PerformanceTestImpl
+         * @see fr.obeo.performance.impl.PerformancePackageImpl#getPerformanceTest()
+         * @generated
+         */
+        EClass PERFORMANCE_TEST = eINSTANCE.getPerformanceTest();
+        /**
+         * The meta object literal for the '<em><b>Sut</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference PERFORMANCE_TEST__SUT = eINSTANCE.getPerformanceTest_Sut();
+        /**
+         * The meta object literal for the '<em><b>Environment</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference PERFORMANCE_TEST__ENVIRONMENT = eINSTANCE.getPerformanceTest_Environment();
+        /**
+         * The meta object literal for the '<em><b>Results</b></em>' containment reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference PERFORMANCE_TEST__RESULTS = eINSTANCE.getPerformanceTest_Results();
+        /**
          * The meta object literal for the '{@link fr.obeo.performance.impl.TestResultImpl <em>Test Result</em>}' class.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
@@ -122,6 +762,59 @@ public interface PerformancePackage extends EPackage {
          * @generated
          */
         EClass TEST_RESULT = eINSTANCE.getTestResult();
+        /**
+         * The meta object literal for the '<em><b>Scenario</b></em>' containment reference feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference TEST_RESULT__SCENARIO = eINSTANCE.getTestResult_Scenario();
+        /**
+         * The meta object literal for the '<em><b>Performance</b></em>' reference list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EReference TEST_RESULT__PERFORMANCE = eINSTANCE.getTestResult_Performance();
+        /**
+         * The meta object literal for the '{@link fr.obeo.performance.impl.MeasureImpl <em>Measure</em>}' class.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see fr.obeo.performance.impl.MeasureImpl
+         * @see fr.obeo.performance.impl.PerformancePackageImpl#getMeasure()
+         * @generated
+         */
+        EClass MEASURE = eINSTANCE.getMeasure();
+        /**
+         * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MEASURE__NAME = eINSTANCE.getMeasure_Name();
+        /**
+         * The meta object literal for the '<em><b>Dimension</b></em>' attribute feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MEASURE__DIMENSION = eINSTANCE.getMeasure_Dimension();
+        /**
+         * The meta object literal for the '<em><b>Value</b></em>' attribute list feature.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @generated
+         */
+        EAttribute MEASURE__VALUE = eINSTANCE.getMeasure_Value();
+        /**
+         * The meta object literal for the '{@link fr.obeo.performance.Dimension <em>Dimension</em>}' enum.
+         * <!-- begin-user-doc -->
+         * <!-- end-user-doc -->
+         * @see fr.obeo.performance.Dimension
+         * @see fr.obeo.performance.impl.PerformancePackageImpl#getDimension()
+         * @generated
+         */
+        EEnum DIMENSION = eINSTANCE.getDimension();
 
     }
 

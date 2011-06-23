@@ -80,6 +80,121 @@ public class PerformanceItemProviderAdapterFactory extends PerformanceAdapterFac
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link fr.obeo.performance.SystemUnderTest} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected SystemUnderTestItemProvider systemUnderTestItemProvider;
+
+    /**
+     * This creates an adapter for a {@link fr.obeo.performance.SystemUnderTest}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createSystemUnderTestAdapter() {
+        if (systemUnderTestItemProvider == null) {
+            systemUnderTestItemProvider = new SystemUnderTestItemProvider(this);
+        }
+
+        return systemUnderTestItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link fr.obeo.performance.Environment} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected EnvironmentItemProvider environmentItemProvider;
+
+    /**
+     * This creates an adapter for a {@link fr.obeo.performance.Environment}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createEnvironmentAdapter() {
+        if (environmentItemProvider == null) {
+            environmentItemProvider = new EnvironmentItemProvider(this);
+        }
+
+        return environmentItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link fr.obeo.performance.Scenario} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected ScenarioItemProvider scenarioItemProvider;
+
+    /**
+     * This creates an adapter for a {@link fr.obeo.performance.Scenario}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createScenarioAdapter() {
+        if (scenarioItemProvider == null) {
+            scenarioItemProvider = new ScenarioItemProvider(this);
+        }
+
+        return scenarioItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link fr.obeo.performance.Property} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected PropertyItemProvider propertyItemProvider;
+
+    /**
+     * This creates an adapter for a {@link fr.obeo.performance.Property}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createPropertyAdapter() {
+        if (propertyItemProvider == null) {
+            propertyItemProvider = new PropertyItemProvider(this);
+        }
+
+        return propertyItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link fr.obeo.performance.PerformanceTest} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected PerformanceTestItemProvider performanceTestItemProvider;
+
+    /**
+     * This creates an adapter for a {@link fr.obeo.performance.PerformanceTest}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createPerformanceTestAdapter() {
+        if (performanceTestItemProvider == null) {
+            performanceTestItemProvider = new PerformanceTestItemProvider(this);
+        }
+
+        return performanceTestItemProvider;
+    }
+
+    /**
      * This keeps track of the one adapter used for all {@link fr.obeo.performance.TestResult} instances.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -100,6 +215,29 @@ public class PerformanceItemProviderAdapterFactory extends PerformanceAdapterFac
         }
 
         return testResultItemProvider;
+    }
+
+    /**
+     * This keeps track of the one adapter used for all {@link fr.obeo.performance.Measure} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected MeasureItemProvider measureItemProvider;
+
+    /**
+     * This creates an adapter for a {@link fr.obeo.performance.Measure}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createMeasureAdapter() {
+        if (measureItemProvider == null) {
+            measureItemProvider = new MeasureItemProvider(this);
+        }
+
+        return measureItemProvider;
     }
 
     /**
@@ -201,7 +339,13 @@ public class PerformanceItemProviderAdapterFactory extends PerformanceAdapterFac
      * @generated
      */
     public void dispose() {
+        if (systemUnderTestItemProvider != null) systemUnderTestItemProvider.dispose();
+        if (environmentItemProvider != null) environmentItemProvider.dispose();
+        if (scenarioItemProvider != null) scenarioItemProvider.dispose();
+        if (propertyItemProvider != null) propertyItemProvider.dispose();
+        if (performanceTestItemProvider != null) performanceTestItemProvider.dispose();
         if (testResultItemProvider != null) testResultItemProvider.dispose();
+        if (measureItemProvider != null) measureItemProvider.dispose();
     }
 
 }

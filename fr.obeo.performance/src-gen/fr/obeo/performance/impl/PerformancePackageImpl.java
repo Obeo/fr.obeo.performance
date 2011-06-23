@@ -10,13 +10,23 @@
  */
 package fr.obeo.performance.impl;
 
+import fr.obeo.performance.Dimension;
+import fr.obeo.performance.Environment;
+import fr.obeo.performance.Measure;
 import fr.obeo.performance.PerformanceFactory;
 import fr.obeo.performance.PerformancePackage;
+import fr.obeo.performance.PerformanceTest;
+import fr.obeo.performance.Property;
+import fr.obeo.performance.Scenario;
+import fr.obeo.performance.SystemUnderTest;
 import fr.obeo.performance.TestResult;
 
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -31,7 +41,50 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass systemUnderTestEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass environmentEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass scenarioEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass propertyEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass performanceTestEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EClass testResultEClass = null;
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass measureEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EEnum dimensionEEnum = null;
 
     /**
      * Creates an instance of the model <b>Package</b>, registered with
@@ -99,8 +152,215 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
      * <!-- end-user-doc -->
      * @generated
      */
+    public EClass getSystemUnderTest() {
+        return systemUnderTestEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getSystemUnderTest_Name() {
+        return (EAttribute)systemUnderTestEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getSystemUnderTest_Properties() {
+        return (EReference)systemUnderTestEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getEnvironment() {
+        return environmentEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getEnvironment_Properties() {
+        return (EReference)environmentEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getScenario() {
+        return scenarioEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getScenario_Name() {
+        return (EAttribute)scenarioEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getScenario_Description() {
+        return (EAttribute)scenarioEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getScenario_InputProperties() {
+        return (EReference)scenarioEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getProperty() {
+        return propertyEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getProperty_Key() {
+        return (EAttribute)propertyEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getProperty_Value() {
+        return (EAttribute)propertyEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getPerformanceTest() {
+        return performanceTestEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getPerformanceTest_Sut() {
+        return (EReference)performanceTestEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getPerformanceTest_Environment() {
+        return (EReference)performanceTestEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getPerformanceTest_Results() {
+        return (EReference)performanceTestEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     public EClass getTestResult() {
         return testResultEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getTestResult_Scenario() {
+        return (EReference)testResultEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getTestResult_Performance() {
+        return (EReference)testResultEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getMeasure() {
+        return measureEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMeasure_Name() {
+        return (EAttribute)measureEClass.getEStructuralFeatures().get(0);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMeasure_Dimension() {
+        return (EAttribute)measureEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EAttribute getMeasure_Value() {
+        return (EAttribute)measureEClass.getEStructuralFeatures().get(2);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EEnum getDimension() {
+        return dimensionEEnum;
     }
 
     /**
@@ -131,7 +391,38 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
         isCreated = true;
 
         // Create classes and their features
+        systemUnderTestEClass = createEClass(SYSTEM_UNDER_TEST);
+        createEAttribute(systemUnderTestEClass, SYSTEM_UNDER_TEST__NAME);
+        createEReference(systemUnderTestEClass, SYSTEM_UNDER_TEST__PROPERTIES);
+
+        environmentEClass = createEClass(ENVIRONMENT);
+        createEReference(environmentEClass, ENVIRONMENT__PROPERTIES);
+
+        scenarioEClass = createEClass(SCENARIO);
+        createEAttribute(scenarioEClass, SCENARIO__NAME);
+        createEAttribute(scenarioEClass, SCENARIO__DESCRIPTION);
+        createEReference(scenarioEClass, SCENARIO__INPUT_PROPERTIES);
+
+        propertyEClass = createEClass(PROPERTY);
+        createEAttribute(propertyEClass, PROPERTY__KEY);
+        createEAttribute(propertyEClass, PROPERTY__VALUE);
+
+        performanceTestEClass = createEClass(PERFORMANCE_TEST);
+        createEReference(performanceTestEClass, PERFORMANCE_TEST__SUT);
+        createEReference(performanceTestEClass, PERFORMANCE_TEST__ENVIRONMENT);
+        createEReference(performanceTestEClass, PERFORMANCE_TEST__RESULTS);
+
         testResultEClass = createEClass(TEST_RESULT);
+        createEReference(testResultEClass, TEST_RESULT__SCENARIO);
+        createEReference(testResultEClass, TEST_RESULT__PERFORMANCE);
+
+        measureEClass = createEClass(MEASURE);
+        createEAttribute(measureEClass, MEASURE__NAME);
+        createEAttribute(measureEClass, MEASURE__DIMENSION);
+        createEAttribute(measureEClass, MEASURE__VALUE);
+
+        // Create enums
+        dimensionEEnum = createEEnum(DIMENSION);
     }
 
     /**
@@ -164,7 +455,40 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
         // Add supertypes to classes
 
         // Initialize classes and features; add operations and parameters
+        initEClass(systemUnderTestEClass, SystemUnderTest.class, "SystemUnderTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getSystemUnderTest_Name(), ecorePackage.getEString(), "name", null, 1, 1, SystemUnderTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getSystemUnderTest_Properties(), this.getProperty(), null, "properties", null, 0, -1, SystemUnderTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(environmentEClass, Environment.class, "Environment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getEnvironment_Properties(), this.getProperty(), null, "properties", null, 0, -1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getScenario_Name(), ecorePackage.getEString(), "name", null, 1, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getScenario_Description(), ecorePackage.getEString(), "description", null, 1, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getScenario_InputProperties(), this.getProperty(), null, "inputProperties", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getProperty_Key(), ecorePackage.getEString(), "key", null, 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getProperty_Value(), ecorePackage.getEString(), "value", null, 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(performanceTestEClass, PerformanceTest.class, "PerformanceTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getPerformanceTest_Sut(), this.getSystemUnderTest(), null, "sut", null, 1, 1, PerformanceTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getPerformanceTest_Environment(), this.getEnvironment(), null, "environment", null, 1, 1, PerformanceTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getPerformanceTest_Results(), this.getTestResult(), null, "results", null, 0, -1, PerformanceTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
         initEClass(testResultEClass, TestResult.class, "TestResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getTestResult_Scenario(), this.getScenario(), null, "scenario", null, 1, 1, TestResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getTestResult_Performance(), this.getMeasure(), null, "performance", null, 0, -1, TestResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(measureEClass, Measure.class, "Measure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEAttribute(getMeasure_Name(), ecorePackage.getEString(), "name", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getMeasure_Dimension(), this.getDimension(), "dimension", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getMeasure_Value(), ecorePackage.getEDouble(), "value", null, 0, -1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        // Initialize enums and add enum literals
+        initEEnum(dimensionEEnum, Dimension.class, "Dimension");
+        addEEnumLiteral(dimensionEEnum, Dimension.TIME);
+        addEEnumLiteral(dimensionEEnum, Dimension.MEMORY);
 
         // Create resource
         createResource(eNS_URI);

@@ -10,6 +10,7 @@
  */
 package fr.obeo.performance;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,10 +18,59 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>Test Result</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link fr.obeo.performance.TestResult#getScenario <em>Scenario</em>}</li>
+ *   <li>{@link fr.obeo.performance.TestResult#getPerformance <em>Performance</em>}</li>
+ * </ul>
+ * </p>
  *
  * @see fr.obeo.performance.PerformancePackage#getTestResult()
  * @model
  * @generated
  */
 public interface TestResult extends EObject {
+
+    /**
+     * Returns the value of the '<em><b>Scenario</b></em>' containment reference.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Scenario</em>' containment reference isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Scenario</em>' containment reference.
+     * @see #setScenario(Scenario)
+     * @see fr.obeo.performance.PerformancePackage#getTestResult_Scenario()
+     * @model containment="true" required="true"
+     * @generated
+     */
+    Scenario getScenario();
+
+    /**
+     * Sets the value of the '{@link fr.obeo.performance.TestResult#getScenario <em>Scenario</em>}' containment reference.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @param value the new value of the '<em>Scenario</em>' containment reference.
+     * @see #getScenario()
+     * @generated
+     */
+    void setScenario(Scenario value);
+
+    /**
+     * Returns the value of the '<em><b>Performance</b></em>' reference list.
+     * The list contents are of type {@link fr.obeo.performance.Measure}.
+     * <!-- begin-user-doc -->
+     * <p>
+     * If the meaning of the '<em>Performance</em>' reference list isn't clear,
+     * there really should be more of a description here...
+     * </p>
+     * <!-- end-user-doc -->
+     * @return the value of the '<em>Performance</em>' reference list.
+     * @see fr.obeo.performance.PerformancePackage#getTestResult_Performance()
+     * @model
+     * @generated
+     */
+    EList<Measure> getPerformance();
 } // TestResult

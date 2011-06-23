@@ -11,9 +11,9 @@
 package fr.obeo.performance.provider;
 
 
-import fr.obeo.performance.PerformanceFactory;
+import fr.obeo.performance.Measure;
 import fr.obeo.performance.PerformancePackage;
-import fr.obeo.performance.TestResult;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -22,7 +22,6 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.common.util.ResourceLocator;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -30,16 +29,17 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.obeo.performance.TestResult} object.
+ * This is the item provider adapter for a {@link fr.obeo.performance.Measure} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TestResultItemProvider
+public class MeasureItemProvider
     extends ItemProviderAdapter
     implements
         IEditingDomainItemProvider,
@@ -53,7 +53,7 @@ public class TestResultItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public TestResultItemProvider(AdapterFactory adapterFactory) {
+    public MeasureItemProvider(AdapterFactory adapterFactory) {
         super(adapterFactory);
     }
 
@@ -68,72 +68,88 @@ public class TestResultItemProvider
         if (itemPropertyDescriptors == null) {
             super.getPropertyDescriptors(object);
 
-            addPerformancePropertyDescriptor(object);
+            addNamePropertyDescriptor(object);
+            addDimensionPropertyDescriptor(object);
+            addValuePropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
 
     /**
-     * This adds a property descriptor for the Performance feature.
+     * This adds a property descriptor for the Name feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected void addPerformancePropertyDescriptor(Object object) {
+    protected void addNamePropertyDescriptor(Object object) {
         itemPropertyDescriptors.add
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_TestResult_performance_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_TestResult_performance_feature", "_UI_TestResult_type"),
-                 PerformancePackage.Literals.TEST_RESULT__PERFORMANCE,
+                 getString("_UI_Measure_name_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_Measure_name_feature", "_UI_Measure_type"),
+                 PerformancePackage.Literals.MEASURE__NAME,
                  true,
                  false,
-                 true,
-                 null,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
                  null,
                  null));
     }
 
     /**
-     * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-     * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+     * This adds a property descriptor for the Dimension feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    @Override
-    public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-        if (childrenFeatures == null) {
-            super.getChildrenFeatures(object);
-            childrenFeatures.add(PerformancePackage.Literals.TEST_RESULT__SCENARIO);
-        }
-        return childrenFeatures;
+    protected void addDimensionPropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_Measure_dimension_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_Measure_dimension_feature", "_UI_Measure_type"),
+                 PerformancePackage.Literals.MEASURE__DIMENSION,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+                 null,
+                 null));
     }
 
     /**
+     * This adds a property descriptor for the Value feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    @Override
-    protected EStructuralFeature getChildFeature(Object object, Object child) {
-        // Check the type of the specified child object and return the proper feature to use for
-        // adding (see {@link AddCommand}) it as a child.
-
-        return super.getChildFeature(object, child);
+    protected void addValuePropertyDescriptor(Object object) {
+        itemPropertyDescriptors.add
+            (createItemPropertyDescriptor
+                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+                 getResourceLocator(),
+                 getString("_UI_Measure_value_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_Measure_value_feature", "_UI_Measure_type"),
+                 PerformancePackage.Literals.MEASURE__VALUE,
+                 true,
+                 false,
+                 false,
+                 ItemPropertyDescriptor.REAL_VALUE_IMAGE,
+                 null,
+                 null));
     }
 
     /**
-     * This returns TestResult.gif.
+     * This returns Measure.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     @Override
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/TestResult"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/Measure"));
     }
 
     /**
@@ -144,7 +160,10 @@ public class TestResultItemProvider
      */
     @Override
     public String getText(Object object) {
-        return getString("_UI_TestResult_type");
+        String label = ((Measure)object).getName();
+        return label == null || label.length() == 0 ?
+            getString("_UI_Measure_type") :
+            getString("_UI_Measure_type") + " " + label;
     }
 
     /**
@@ -158,9 +177,11 @@ public class TestResultItemProvider
     public void notifyChanged(Notification notification) {
         updateChildren(notification);
 
-        switch (notification.getFeatureID(TestResult.class)) {
-            case PerformancePackage.TEST_RESULT__SCENARIO:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+        switch (notification.getFeatureID(Measure.class)) {
+            case PerformancePackage.MEASURE__NAME:
+            case PerformancePackage.MEASURE__DIMENSION:
+            case PerformancePackage.MEASURE__VALUE:
+                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
                 return;
         }
         super.notifyChanged(notification);
@@ -176,11 +197,6 @@ public class TestResultItemProvider
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
         super.collectNewChildDescriptors(newChildDescriptors, object);
-
-        newChildDescriptors.add
-            (createChildParameter
-                (PerformancePackage.Literals.TEST_RESULT__SCENARIO,
-                 PerformanceFactory.eINSTANCE.createScenario()));
     }
 
     /**

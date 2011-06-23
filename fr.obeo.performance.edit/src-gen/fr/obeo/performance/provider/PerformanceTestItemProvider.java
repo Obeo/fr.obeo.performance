@@ -13,7 +13,8 @@ package fr.obeo.performance.provider;
 
 import fr.obeo.performance.PerformanceFactory;
 import fr.obeo.performance.PerformancePackage;
-import fr.obeo.performance.TestResult;
+import fr.obeo.performance.PerformanceTest;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -23,7 +24,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -34,12 +35,12 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link fr.obeo.performance.TestResult} object.
+ * This is the item provider adapter for a {@link fr.obeo.performance.PerformanceTest} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class TestResultItemProvider
+public class PerformanceTestItemProvider
     extends ItemProviderAdapter
     implements
         IEditingDomainItemProvider,
@@ -53,7 +54,7 @@ public class TestResultItemProvider
      * <!-- end-user-doc -->
      * @generated
      */
-    public TestResultItemProvider(AdapterFactory adapterFactory) {
+    public PerformanceTestItemProvider(AdapterFactory adapterFactory) {
         super(adapterFactory);
     }
 
@@ -68,31 +69,8 @@ public class TestResultItemProvider
         if (itemPropertyDescriptors == null) {
             super.getPropertyDescriptors(object);
 
-            addPerformancePropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
-    }
-
-    /**
-     * This adds a property descriptor for the Performance feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    protected void addPerformancePropertyDescriptor(Object object) {
-        itemPropertyDescriptors.add
-            (createItemPropertyDescriptor
-                (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-                 getResourceLocator(),
-                 getString("_UI_TestResult_performance_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_TestResult_performance_feature", "_UI_TestResult_type"),
-                 PerformancePackage.Literals.TEST_RESULT__PERFORMANCE,
-                 true,
-                 false,
-                 true,
-                 null,
-                 null,
-                 null));
     }
 
     /**
@@ -107,7 +85,9 @@ public class TestResultItemProvider
     public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
         if (childrenFeatures == null) {
             super.getChildrenFeatures(object);
-            childrenFeatures.add(PerformancePackage.Literals.TEST_RESULT__SCENARIO);
+            childrenFeatures.add(PerformancePackage.Literals.PERFORMANCE_TEST__SUT);
+            childrenFeatures.add(PerformancePackage.Literals.PERFORMANCE_TEST__ENVIRONMENT);
+            childrenFeatures.add(PerformancePackage.Literals.PERFORMANCE_TEST__RESULTS);
         }
         return childrenFeatures;
     }
@@ -126,14 +106,14 @@ public class TestResultItemProvider
     }
 
     /**
-     * This returns TestResult.gif.
+     * This returns PerformanceTest.gif.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
     @Override
     public Object getImage(Object object) {
-        return overlayImage(object, getResourceLocator().getImage("full/obj16/TestResult"));
+        return overlayImage(object, getResourceLocator().getImage("full/obj16/PerformanceTest"));
     }
 
     /**
@@ -144,7 +124,7 @@ public class TestResultItemProvider
      */
     @Override
     public String getText(Object object) {
-        return getString("_UI_TestResult_type");
+        return getString("_UI_PerformanceTest_type");
     }
 
     /**
@@ -158,8 +138,10 @@ public class TestResultItemProvider
     public void notifyChanged(Notification notification) {
         updateChildren(notification);
 
-        switch (notification.getFeatureID(TestResult.class)) {
-            case PerformancePackage.TEST_RESULT__SCENARIO:
+        switch (notification.getFeatureID(PerformanceTest.class)) {
+            case PerformancePackage.PERFORMANCE_TEST__SUT:
+            case PerformancePackage.PERFORMANCE_TEST__ENVIRONMENT:
+            case PerformancePackage.PERFORMANCE_TEST__RESULTS:
                 fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
                 return;
         }
@@ -179,8 +161,18 @@ public class TestResultItemProvider
 
         newChildDescriptors.add
             (createChildParameter
-                (PerformancePackage.Literals.TEST_RESULT__SCENARIO,
-                 PerformanceFactory.eINSTANCE.createScenario()));
+                (PerformancePackage.Literals.PERFORMANCE_TEST__SUT,
+                 PerformanceFactory.eINSTANCE.createSystemUnderTest()));
+
+        newChildDescriptors.add
+            (createChildParameter
+                (PerformancePackage.Literals.PERFORMANCE_TEST__ENVIRONMENT,
+                 PerformanceFactory.eINSTANCE.createEnvironment()));
+
+        newChildDescriptors.add
+            (createChildParameter
+                (PerformancePackage.Literals.PERFORMANCE_TEST__RESULTS,
+                 PerformanceFactory.eINSTANCE.createTestResult()));
     }
 
     /**

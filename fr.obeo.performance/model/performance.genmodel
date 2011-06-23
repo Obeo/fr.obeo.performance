@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011 Obeo.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;   Obeo - initial API and implementation"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011 Obeo.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html&#xA;&#xA;Contributors:&#xA;   Obeo - initial API and implementation"
     modelDirectory="/fr.obeo.performance/src-gen" editDirectory="/fr.obeo.performance.edit/src-gen"
     editorDirectory="/fr.obeo.performance.editor/src-gen" modelPluginID="fr.obeo.performance"
     modelName="Performance" importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0"
@@ -8,6 +9,39 @@
   <foreignModel>performance.ecore</foreignModel>
   <genPackages prefix="Performance" basePackage="fr.obeo" disposableProviderFactory="true"
       ecorePackage="performance.ecore#/">
-    <genClasses ecoreClass="performance.ecore#//TestResult"/>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="performance.ecore#//Dimension">
+      <genEnumLiterals ecoreEnumLiteral="performance.ecore#//Dimension/TIME"/>
+      <genEnumLiterals ecoreEnumLiteral="performance.ecore#//Dimension/MEMORY"/>
+    </genEnums>
+    <genClasses ecoreClass="performance.ecore#//SystemUnderTest">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//SystemUnderTest/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//SystemUnderTest/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//Environment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//Environment/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//Scenario">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Scenario/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Scenario/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//Scenario/inputProperties"/>
+    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//Property">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Property/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Property/value"/>
+    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//PerformanceTest">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//PerformanceTest/sut"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//PerformanceTest/environment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//PerformanceTest/results"/>
+    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//TestResult">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//TestResult/scenario"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference performance.ecore#//TestResult/performance"/>
+    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//Measure">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Measure/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Measure/dimension"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Measure/value"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

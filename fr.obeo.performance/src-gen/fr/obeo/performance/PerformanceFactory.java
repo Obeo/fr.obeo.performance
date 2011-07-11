@@ -84,6 +84,15 @@ public interface PerformanceFactory extends EFactory {
     TestResult createTestResult();
 
     /**
+     * Returns a new object of class '<em>Data Point</em>'.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @return a new object of class '<em>Data Point</em>'.
+     * @generated
+     */
+    DataPoint createDataPoint();
+
+    /**
      * Returns a new object of class '<em>Measure</em>'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->

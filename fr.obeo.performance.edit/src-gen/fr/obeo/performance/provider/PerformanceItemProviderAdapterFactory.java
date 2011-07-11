@@ -218,6 +218,29 @@ public class PerformanceItemProviderAdapterFactory extends PerformanceAdapterFac
     }
 
     /**
+     * This keeps track of the one adapter used for all {@link fr.obeo.performance.DataPoint} instances.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    protected DataPointItemProvider dataPointItemProvider;
+
+    /**
+     * This creates an adapter for a {@link fr.obeo.performance.DataPoint}.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    @Override
+    public Adapter createDataPointAdapter() {
+        if (dataPointItemProvider == null) {
+            dataPointItemProvider = new DataPointItemProvider(this);
+        }
+
+        return dataPointItemProvider;
+    }
+
+    /**
      * This keeps track of the one adapter used for all {@link fr.obeo.performance.Measure} instances.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -345,6 +368,7 @@ public class PerformanceItemProviderAdapterFactory extends PerformanceAdapterFac
         if (propertyItemProvider != null) propertyItemProvider.dispose();
         if (performanceTestItemProvider != null) performanceTestItemProvider.dispose();
         if (testResultItemProvider != null) testResultItemProvider.dispose();
+        if (dataPointItemProvider != null) dataPointItemProvider.dispose();
         if (measureItemProvider != null) measureItemProvider.dispose();
     }
 

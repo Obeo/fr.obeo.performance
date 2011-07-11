@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link fr.obeo.performance.Scenario#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.performance.Scenario#getDescription <em>Description</em>}</li>
- *   <li>{@link fr.obeo.performance.Scenario#getInputProperties <em>Input Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -32,7 +31,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface Scenario extends EObject {
+public interface Scenario extends Properties {
     /**
      * Returns the value of the '<em><b>Name</b></em>' attribute.
      * <!-- begin-user-doc -->
@@ -84,21 +83,5 @@ public interface Scenario extends EObject {
      * @generated
      */
     void setDescription(String value);
-
-    /**
-     * Returns the value of the '<em><b>Input Properties</b></em>' containment reference list.
-     * The list contents are of type {@link fr.obeo.performance.Property}.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Input Properties</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Input Properties</em>' containment reference list.
-     * @see fr.obeo.performance.PerformancePackage#getScenario_InputProperties()
-     * @model containment="true"
-     * @generated
-     */
-    EList<Property> getInputProperties();
 
 } // Scenario

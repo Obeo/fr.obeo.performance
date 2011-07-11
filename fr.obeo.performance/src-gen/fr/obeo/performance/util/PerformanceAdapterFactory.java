@@ -88,6 +88,10 @@ public class PerformanceAdapterFactory extends AdapterFactoryImpl {
                 return createScenarioAdapter();
             }
             @Override
+            public Adapter caseProperties(Properties object) {
+                return createPropertiesAdapter();
+            }
+            @Override
             public Adapter caseProperty(Property object) {
                 return createPropertyAdapter();
             }
@@ -98,6 +102,10 @@ public class PerformanceAdapterFactory extends AdapterFactoryImpl {
             @Override
             public Adapter caseTestResult(TestResult object) {
                 return createTestResultAdapter();
+            }
+            @Override
+            public Adapter caseDataPoint(DataPoint object) {
+                return createDataPointAdapter();
             }
             @Override
             public Adapter caseMeasure(Measure object) {
@@ -166,6 +174,20 @@ public class PerformanceAdapterFactory extends AdapterFactoryImpl {
     }
 
     /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.Properties <em>Properties</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.Properties
+     * @generated
+     */
+    public Adapter createPropertiesAdapter() {
+        return null;
+    }
+
+    /**
      * Creates a new adapter for an object of class '{@link fr.obeo.performance.Property <em>Property</em>}'.
      * <!-- begin-user-doc -->
      * This default implementation returns null so that we can easily ignore cases;
@@ -204,6 +226,20 @@ public class PerformanceAdapterFactory extends AdapterFactoryImpl {
      * @generated
      */
     public Adapter createTestResultAdapter() {
+        return null;
+    }
+
+    /**
+     * Creates a new adapter for an object of class '{@link fr.obeo.performance.DataPoint <em>Data Point</em>}'.
+     * <!-- begin-user-doc -->
+     * This default implementation returns null so that we can easily ignore cases;
+     * it's useful to ignore a case when inheritance will catch all the cases anyway.
+     * <!-- end-user-doc -->
+     * @return the new adapter.
+     * @see fr.obeo.performance.DataPoint
+     * @generated
+     */
+    public Adapter createDataPointAdapter() {
         return null;
     }
 

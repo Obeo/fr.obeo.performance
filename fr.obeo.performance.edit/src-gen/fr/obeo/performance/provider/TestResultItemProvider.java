@@ -68,25 +68,25 @@ public class TestResultItemProvider
         if (itemPropertyDescriptors == null) {
             super.getPropertyDescriptors(object);
 
-            addPerformancePropertyDescriptor(object);
+            addDataPointsPropertyDescriptor(object);
         }
         return itemPropertyDescriptors;
     }
 
     /**
-     * This adds a property descriptor for the Performance feature.
+     * This adds a property descriptor for the Data Points feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected void addPerformancePropertyDescriptor(Object object) {
+    protected void addDataPointsPropertyDescriptor(Object object) {
         itemPropertyDescriptors.add
             (createItemPropertyDescriptor
                 (((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
                  getResourceLocator(),
-                 getString("_UI_TestResult_performance_feature"),
-                 getString("_UI_PropertyDescriptor_description", "_UI_TestResult_performance_feature", "_UI_TestResult_type"),
-                 PerformancePackage.Literals.TEST_RESULT__PERFORMANCE,
+                 getString("_UI_TestResult_dataPoints_feature"),
+                 getString("_UI_PropertyDescriptor_description", "_UI_TestResult_dataPoints_feature", "_UI_TestResult_type"),
+                 PerformancePackage.Literals.TEST_RESULT__DATA_POINTS,
                  true,
                  false,
                  true,

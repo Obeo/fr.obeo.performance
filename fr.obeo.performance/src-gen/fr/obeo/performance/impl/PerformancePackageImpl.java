@@ -10,12 +10,14 @@
  */
 package fr.obeo.performance.impl;
 
+import fr.obeo.performance.DataPoint;
 import fr.obeo.performance.Dimension;
 import fr.obeo.performance.Environment;
 import fr.obeo.performance.Measure;
 import fr.obeo.performance.PerformanceFactory;
 import fr.obeo.performance.PerformancePackage;
 import fr.obeo.performance.PerformanceTest;
+import fr.obeo.performance.Properties;
 import fr.obeo.performance.Property;
 import fr.obeo.performance.Scenario;
 import fr.obeo.performance.SystemUnderTest;
@@ -59,6 +61,12 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
      * <!-- end-user-doc -->
      * @generated
      */
+    private EClass propertiesEClass = null;
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
     private EClass propertyEClass = null;
     /**
      * <!-- begin-user-doc -->
@@ -73,6 +81,12 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
      */
     private EClass testResultEClass = null;
 
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    private EClass dataPointEClass = null;
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -170,26 +184,8 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getSystemUnderTest_Properties() {
-        return (EReference)systemUnderTestEClass.getEStructuralFeatures().get(1);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     public EClass getEnvironment() {
         return environmentEClass;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    public EReference getEnvironment_Properties() {
-        return (EReference)environmentEClass.getEStructuralFeatures().get(0);
     }
 
     /**
@@ -224,8 +220,17 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getScenario_InputProperties() {
-        return (EReference)scenarioEClass.getEStructuralFeatures().get(2);
+    public EClass getProperties() {
+        return propertiesEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getProperties_Properties() {
+        return (EReference)propertiesEClass.getEStructuralFeatures().get(0);
     }
 
     /**
@@ -314,8 +319,26 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
      * <!-- end-user-doc -->
      * @generated
      */
-    public EReference getTestResult_Performance() {
+    public EReference getTestResult_DataPoints() {
         return (EReference)testResultEClass.getEStructuralFeatures().get(1);
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EClass getDataPoint() {
+        return dataPointEClass;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public EReference getDataPoint_Measures() {
+        return (EReference)dataPointEClass.getEStructuralFeatures().get(0);
     }
 
     /**
@@ -393,15 +416,15 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
         // Create classes and their features
         systemUnderTestEClass = createEClass(SYSTEM_UNDER_TEST);
         createEAttribute(systemUnderTestEClass, SYSTEM_UNDER_TEST__NAME);
-        createEReference(systemUnderTestEClass, SYSTEM_UNDER_TEST__PROPERTIES);
 
         environmentEClass = createEClass(ENVIRONMENT);
-        createEReference(environmentEClass, ENVIRONMENT__PROPERTIES);
 
         scenarioEClass = createEClass(SCENARIO);
         createEAttribute(scenarioEClass, SCENARIO__NAME);
         createEAttribute(scenarioEClass, SCENARIO__DESCRIPTION);
-        createEReference(scenarioEClass, SCENARIO__INPUT_PROPERTIES);
+
+        propertiesEClass = createEClass(PROPERTIES);
+        createEReference(propertiesEClass, PROPERTIES__PROPERTIES);
 
         propertyEClass = createEClass(PROPERTY);
         createEAttribute(propertyEClass, PROPERTY__KEY);
@@ -414,7 +437,10 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
 
         testResultEClass = createEClass(TEST_RESULT);
         createEReference(testResultEClass, TEST_RESULT__SCENARIO);
-        createEReference(testResultEClass, TEST_RESULT__PERFORMANCE);
+        createEReference(testResultEClass, TEST_RESULT__DATA_POINTS);
+
+        dataPointEClass = createEClass(DATA_POINT);
+        createEReference(dataPointEClass, DATA_POINT__MEASURES);
 
         measureEClass = createEClass(MEASURE);
         createEAttribute(measureEClass, MEASURE__NAME);
@@ -453,19 +479,22 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
         // Set bounds for type parameters
 
         // Add supertypes to classes
+        systemUnderTestEClass.getESuperTypes().add(this.getProperties());
+        environmentEClass.getESuperTypes().add(this.getProperties());
+        scenarioEClass.getESuperTypes().add(this.getProperties());
 
         // Initialize classes and features; add operations and parameters
         initEClass(systemUnderTestEClass, SystemUnderTest.class, "SystemUnderTest", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getSystemUnderTest_Name(), ecorePackage.getEString(), "name", null, 1, 1, SystemUnderTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getSystemUnderTest_Properties(), this.getProperty(), null, "properties", null, 0, -1, SystemUnderTest.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(environmentEClass, Environment.class, "Environment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-        initEReference(getEnvironment_Properties(), this.getProperty(), null, "properties", null, 0, -1, Environment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(scenarioEClass, Scenario.class, "Scenario", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getScenario_Name(), ecorePackage.getEString(), "name", null, 1, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getScenario_Description(), ecorePackage.getEString(), "description", null, 1, 1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getScenario_InputProperties(), this.getProperty(), null, "inputProperties", null, 0, -1, Scenario.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(propertiesEClass, Properties.class, "Properties", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getProperties_Properties(), this.getProperty(), null, "properties", null, 0, -1, Properties.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(propertyEClass, Property.class, "Property", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getProperty_Key(), ecorePackage.getEString(), "key", null, 1, 1, Property.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -478,12 +507,15 @@ public class PerformancePackageImpl extends EPackageImpl implements PerformanceP
 
         initEClass(testResultEClass, TestResult.class, "TestResult", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEReference(getTestResult_Scenario(), this.getScenario(), null, "scenario", null, 1, 1, TestResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEReference(getTestResult_Performance(), this.getMeasure(), null, "performance", null, 0, -1, TestResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEReference(getTestResult_DataPoints(), this.getDataPoint(), null, "dataPoints", null, 0, -1, TestResult.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+        initEClass(dataPointEClass, DataPoint.class, "DataPoint", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+        initEReference(getDataPoint_Measures(), this.getMeasure(), null, "measures", null, 0, -1, DataPoint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         initEClass(measureEClass, Measure.class, "Measure", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
         initEAttribute(getMeasure_Name(), ecorePackage.getEString(), "name", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
         initEAttribute(getMeasure_Dimension(), this.getDimension(), "dimension", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-        initEAttribute(getMeasure_Value(), ecorePackage.getEDouble(), "value", null, 0, -1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+        initEAttribute(getMeasure_Value(), ecorePackage.getEDouble(), "value", null, 1, 1, Measure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
         // Initialize enums and add enum literals
         initEEnum(dimensionEEnum, Dimension.class, "Dimension");

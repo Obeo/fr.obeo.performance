@@ -11,12 +11,11 @@
 package fr.obeo.performance.impl;
 
 import fr.obeo.performance.PerformancePackage;
+import fr.obeo.performance.Properties;
 import fr.obeo.performance.Property;
-import fr.obeo.performance.SystemUnderTest;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -24,7 +23,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -32,44 +30,34 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>System Under Test</b></em>'.
+ * An implementation of the model object '<em><b>Properties</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.obeo.performance.impl.SystemUnderTestImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.obeo.performance.impl.PropertiesImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTest {
+public abstract class PropertiesImpl extends EObjectImpl implements Properties {
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
+     * @see #getProperties()
      * @generated
      * @ordered
      */
-    protected static final String NAME_EDEFAULT = null;
-
-    /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
-    protected String name = NAME_EDEFAULT;
+    protected EList<Property> properties;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected SystemUnderTestImpl() {
+    protected PropertiesImpl() {
         super();
     }
 
@@ -80,7 +68,7 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
      */
     @Override
     protected EClass eStaticClass() {
-        return PerformancePackage.Literals.SYSTEM_UNDER_TEST;
+        return PerformancePackage.Literals.PROPERTIES;
     }
 
     /**
@@ -88,8 +76,11 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getName() {
-        return name;
+    public EList<Property> getProperties() {
+        if (properties == null) {
+            properties = new EObjectContainmentEList<Property>(Property.class, this, PerformancePackage.PROPERTIES__PROPERTIES);
+        }
+        return properties;
     }
 
     /**
@@ -97,11 +88,13 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setName(String newName) {
-        String oldName = name;
-        name = newName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, PerformancePackage.SYSTEM_UNDER_TEST__NAME, oldName, name));
+    @Override
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case PerformancePackage.PROPERTIES__PROPERTIES:
+                return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
     }
 
     /**
@@ -112,8 +105,8 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                return getName();
+            case PerformancePackage.PROPERTIES__PROPERTIES:
+                return getProperties();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -127,8 +120,9 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                setName((String)newValue);
+            case PerformancePackage.PROPERTIES__PROPERTIES:
+                getProperties().clear();
+                getProperties().addAll((Collection<? extends Property>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -142,8 +136,8 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                setName(NAME_EDEFAULT);
+            case PerformancePackage.PROPERTIES__PROPERTIES:
+                getProperties().clear();
                 return;
         }
         super.eUnset(featureID);
@@ -157,26 +151,10 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+            case PerformancePackage.PROPERTIES__PROPERTIES:
+                return properties != null && !properties.isEmpty();
         }
         return super.eIsSet(featureID);
     }
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public String toString() {
-        if (eIsProxy()) return super.toString();
-
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
-        result.append(name);
-        result.append(')');
-        return result.toString();
-    }
-
-} //SystemUnderTestImpl
+} //PropertiesImpl

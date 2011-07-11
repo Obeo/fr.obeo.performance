@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.obeo.performance.TestResult#getScenario <em>Scenario</em>}</li>
- *   <li>{@link fr.obeo.performance.TestResult#getPerformance <em>Performance</em>}</li>
+ *   <li>{@link fr.obeo.performance.TestResult#getDataPoints <em>Data Points</em>}</li>
  * </ul>
  * </p>
  *
@@ -59,18 +59,18 @@ public interface TestResult extends EObject {
     void setScenario(Scenario value);
 
     /**
-     * Returns the value of the '<em><b>Performance</b></em>' reference list.
-     * The list contents are of type {@link fr.obeo.performance.Measure}.
+     * Returns the value of the '<em><b>Data Points</b></em>' reference list.
+     * The list contents are of type {@link fr.obeo.performance.DataPoint}.
      * <!-- begin-user-doc -->
      * <p>
-     * If the meaning of the '<em>Performance</em>' reference list isn't clear,
+     * If the meaning of the '<em>Data Points</em>' reference list isn't clear,
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Performance</em>' reference list.
-     * @see fr.obeo.performance.PerformancePackage#getTestResult_Performance()
+     * @return the value of the '<em>Data Points</em>' reference list.
+     * @see fr.obeo.performance.PerformancePackage#getTestResult_DataPoints()
      * @model
      * @generated
      */
-    EList<Measure> getPerformance();
+    EList<DataPoint> getDataPoints();
 } // TestResult

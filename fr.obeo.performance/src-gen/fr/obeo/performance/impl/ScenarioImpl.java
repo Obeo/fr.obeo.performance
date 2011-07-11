@@ -39,13 +39,12 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link fr.obeo.performance.impl.ScenarioImpl#getName <em>Name</em>}</li>
  *   <li>{@link fr.obeo.performance.impl.ScenarioImpl#getDescription <em>Description</em>}</li>
- *   <li>{@link fr.obeo.performance.impl.ScenarioImpl#getInputProperties <em>Input Properties</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ScenarioImpl extends EObjectImpl implements Scenario {
+public class ScenarioImpl extends PropertiesImpl implements Scenario {
     /**
      * The default value of the '{@link #getName() <em>Name</em>}' attribute.
      * <!-- begin-user-doc -->
@@ -85,16 +84,6 @@ public class ScenarioImpl extends EObjectImpl implements Scenario {
      * @ordered
      */
     protected String description = DESCRIPTION_EDEFAULT;
-
-    /**
-     * The cached value of the '{@link #getInputProperties() <em>Input Properties</em>}' containment reference list.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getInputProperties()
-     * @generated
-     * @ordered
-     */
-    protected EList<Property> inputProperties;
 
     /**
      * <!-- begin-user-doc -->
@@ -162,32 +151,6 @@ public class ScenarioImpl extends EObjectImpl implements Scenario {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Property> getInputProperties() {
-        if (inputProperties == null) {
-            inputProperties = new EObjectContainmentEList<Property>(Property.class, this, PerformancePackage.SCENARIO__INPUT_PROPERTIES);
-        }
-        return inputProperties;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-        switch (featureID) {
-            case PerformancePackage.SCENARIO__INPUT_PROPERTIES:
-                return ((InternalEList<?>)getInputProperties()).basicRemove(otherEnd, msgs);
-        }
-        return super.eInverseRemove(otherEnd, featureID, msgs);
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
@@ -195,8 +158,6 @@ public class ScenarioImpl extends EObjectImpl implements Scenario {
                 return getName();
             case PerformancePackage.SCENARIO__DESCRIPTION:
                 return getDescription();
-            case PerformancePackage.SCENARIO__INPUT_PROPERTIES:
-                return getInputProperties();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -216,10 +177,6 @@ public class ScenarioImpl extends EObjectImpl implements Scenario {
             case PerformancePackage.SCENARIO__DESCRIPTION:
                 setDescription((String)newValue);
                 return;
-            case PerformancePackage.SCENARIO__INPUT_PROPERTIES:
-                getInputProperties().clear();
-                getInputProperties().addAll((Collection<? extends Property>)newValue);
-                return;
         }
         super.eSet(featureID, newValue);
     }
@@ -238,9 +195,6 @@ public class ScenarioImpl extends EObjectImpl implements Scenario {
             case PerformancePackage.SCENARIO__DESCRIPTION:
                 setDescription(DESCRIPTION_EDEFAULT);
                 return;
-            case PerformancePackage.SCENARIO__INPUT_PROPERTIES:
-                getInputProperties().clear();
-                return;
         }
         super.eUnset(featureID);
     }
@@ -257,8 +211,6 @@ public class ScenarioImpl extends EObjectImpl implements Scenario {
                 return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
             case PerformancePackage.SCENARIO__DESCRIPTION:
                 return DESCRIPTION_EDEFAULT == null ? description != null : !DESCRIPTION_EDEFAULT.equals(description);
-            case PerformancePackage.SCENARIO__INPUT_PROPERTIES:
-                return inputProperties != null && !inputProperties.isEmpty();
         }
         return super.eIsSet(featureID);
     }

@@ -41,7 +41,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class EnvironmentItemProvider
-    extends ItemProviderAdapter
+    extends PropertiesItemProvider
     implements
         IEditingDomainItemProvider,
         IStructuredItemContentProvider,
@@ -71,36 +71,6 @@ public class EnvironmentItemProvider
 
         }
         return itemPropertyDescriptors;
-    }
-
-    /**
-     * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-     * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-     * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-        if (childrenFeatures == null) {
-            super.getChildrenFeatures(object);
-            childrenFeatures.add(PerformancePackage.Literals.ENVIRONMENT__PROPERTIES);
-        }
-        return childrenFeatures;
-    }
-
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    protected EStructuralFeature getChildFeature(Object object, Object child) {
-        // Check the type of the specified child object and return the proper feature to use for
-        // adding (see {@link AddCommand}) it as a child.
-
-        return super.getChildFeature(object, child);
     }
 
     /**
@@ -135,12 +105,6 @@ public class EnvironmentItemProvider
     @Override
     public void notifyChanged(Notification notification) {
         updateChildren(notification);
-
-        switch (notification.getFeatureID(Environment.class)) {
-            case PerformancePackage.ENVIRONMENT__PROPERTIES:
-                fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-                return;
-        }
         super.notifyChanged(notification);
     }
 
@@ -154,22 +118,6 @@ public class EnvironmentItemProvider
     @Override
     protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
         super.collectNewChildDescriptors(newChildDescriptors, object);
-
-        newChildDescriptors.add
-            (createChildParameter
-                (PerformancePackage.Literals.ENVIRONMENT__PROPERTIES,
-                 PerformanceFactory.eINSTANCE.createProperty()));
-    }
-
-    /**
-     * Return the resource locator for this item provider's resources.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public ResourceLocator getResourceLocator() {
-        return PerformanceEditPlugin.INSTANCE;
     }
 
 }

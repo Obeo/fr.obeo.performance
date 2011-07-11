@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link fr.obeo.performance.SystemUnderTest#getName <em>Name</em>}</li>
- *   <li>{@link fr.obeo.performance.SystemUnderTest#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,7 +30,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface SystemUnderTest extends EObject {
+public interface SystemUnderTest extends Properties {
     /**
      * Returns the value of the '<em><b>Name</b></em>' attribute.
      * <!-- begin-user-doc -->
@@ -57,21 +56,5 @@ public interface SystemUnderTest extends EObject {
      * @generated
      */
     void setName(String value);
-
-    /**
-     * Returns the value of the '<em><b>Properties</b></em>' containment reference list.
-     * The list contents are of type {@link fr.obeo.performance.Property}.
-     * <!-- begin-user-doc -->
-     * <p>
-     * If the meaning of the '<em>Properties</em>' containment reference list isn't clear,
-     * there really should be more of a description here...
-     * </p>
-     * <!-- end-user-doc -->
-     * @return the value of the '<em>Properties</em>' containment reference list.
-     * @see fr.obeo.performance.PerformancePackage#getSystemUnderTest_Properties()
-     * @model containment="true"
-     * @generated
-     */
-    EList<Property> getProperties();
 
 } // SystemUnderTest

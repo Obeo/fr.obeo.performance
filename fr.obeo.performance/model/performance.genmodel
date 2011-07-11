@@ -15,15 +15,14 @@
     </genEnums>
     <genClasses ecoreClass="performance.ecore#//SystemUnderTest">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//SystemUnderTest/name"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//SystemUnderTest/properties"/>
     </genClasses>
-    <genClasses ecoreClass="performance.ecore#//Environment">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//Environment/properties"/>
-    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//Environment"/>
     <genClasses ecoreClass="performance.ecore#//Scenario">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Scenario/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Scenario/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//Scenario/inputProperties"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="performance.ecore#//Properties">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//Properties/properties"/>
     </genClasses>
     <genClasses ecoreClass="performance.ecore#//Property">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Property/key"/>
@@ -36,7 +35,10 @@
     </genClasses>
     <genClasses ecoreClass="performance.ecore#//TestResult">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//TestResult/scenario"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference performance.ecore#//TestResult/performance"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference performance.ecore#//TestResult/dataPoints"/>
+    </genClasses>
+    <genClasses ecoreClass="performance.ecore#//DataPoint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference performance.ecore#//DataPoint/measures"/>
     </genClasses>
     <genClasses ecoreClass="performance.ecore#//Measure">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute performance.ecore#//Measure/name"/>

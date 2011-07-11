@@ -10,13 +10,12 @@
  */
 package fr.obeo.performance.impl;
 
+import fr.obeo.performance.DataPoint;
+import fr.obeo.performance.Measure;
 import fr.obeo.performance.PerformancePackage;
-import fr.obeo.performance.Property;
-import fr.obeo.performance.SystemUnderTest;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -24,7 +23,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -32,44 +30,34 @@ import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>System Under Test</b></em>'.
+ * An implementation of the model object '<em><b>Data Point</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link fr.obeo.performance.impl.SystemUnderTestImpl#getName <em>Name</em>}</li>
+ *   <li>{@link fr.obeo.performance.impl.DataPointImpl#getMeasures <em>Measures</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTest {
+public class DataPointImpl extends EObjectImpl implements DataPoint {
     /**
-     * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+     * The cached value of the '{@link #getMeasures() <em>Measures</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getName()
+     * @see #getMeasures()
      * @generated
      * @ordered
      */
-    protected static final String NAME_EDEFAULT = null;
-
-    /**
-     * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see #getName()
-     * @generated
-     * @ordered
-     */
-    protected String name = NAME_EDEFAULT;
+    protected EList<Measure> measures;
 
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    protected SystemUnderTestImpl() {
+    protected DataPointImpl() {
         super();
     }
 
@@ -80,7 +68,7 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
      */
     @Override
     protected EClass eStaticClass() {
-        return PerformancePackage.Literals.SYSTEM_UNDER_TEST;
+        return PerformancePackage.Literals.DATA_POINT;
     }
 
     /**
@@ -88,8 +76,11 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
      * <!-- end-user-doc -->
      * @generated
      */
-    public String getName() {
-        return name;
+    public EList<Measure> getMeasures() {
+        if (measures == null) {
+            measures = new EObjectContainmentEList<Measure>(Measure.class, this, PerformancePackage.DATA_POINT__MEASURES);
+        }
+        return measures;
     }
 
     /**
@@ -97,11 +88,13 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
      * <!-- end-user-doc -->
      * @generated
      */
-    public void setName(String newName) {
-        String oldName = name;
-        name = newName;
-        if (eNotificationRequired())
-            eNotify(new ENotificationImpl(this, Notification.SET, PerformancePackage.SYSTEM_UNDER_TEST__NAME, oldName, name));
+    @Override
+    public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+        switch (featureID) {
+            case PerformancePackage.DATA_POINT__MEASURES:
+                return ((InternalEList<?>)getMeasures()).basicRemove(otherEnd, msgs);
+        }
+        return super.eInverseRemove(otherEnd, featureID, msgs);
     }
 
     /**
@@ -112,8 +105,8 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public Object eGet(int featureID, boolean resolve, boolean coreType) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                return getName();
+            case PerformancePackage.DATA_POINT__MEASURES:
+                return getMeasures();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -127,8 +120,9 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public void eSet(int featureID, Object newValue) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                setName((String)newValue);
+            case PerformancePackage.DATA_POINT__MEASURES:
+                getMeasures().clear();
+                getMeasures().addAll((Collection<? extends Measure>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -142,8 +136,8 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public void eUnset(int featureID) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                setName(NAME_EDEFAULT);
+            case PerformancePackage.DATA_POINT__MEASURES:
+                getMeasures().clear();
                 return;
         }
         super.eUnset(featureID);
@@ -157,26 +151,10 @@ public class SystemUnderTestImpl extends PropertiesImpl implements SystemUnderTe
     @Override
     public boolean eIsSet(int featureID) {
         switch (featureID) {
-            case PerformancePackage.SYSTEM_UNDER_TEST__NAME:
-                return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+            case PerformancePackage.DATA_POINT__MEASURES:
+                return measures != null && !measures.isEmpty();
         }
         return super.eIsSet(featureID);
     }
 
-    /**
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    @Override
-    public String toString() {
-        if (eIsProxy()) return super.toString();
-
-        StringBuffer result = new StringBuffer(super.toString());
-        result.append(" (name: ");
-        result.append(name);
-        result.append(')');
-        return result.toString();
-    }
-
-} //SystemUnderTestImpl
+} //DataPointImpl

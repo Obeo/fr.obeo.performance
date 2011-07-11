@@ -94,18 +94,27 @@ public class PerformanceSwitch<T> {
             case PerformancePackage.SYSTEM_UNDER_TEST: {
                 SystemUnderTest systemUnderTest = (SystemUnderTest)theEObject;
                 T result = caseSystemUnderTest(systemUnderTest);
+                if (result == null) result = caseProperties(systemUnderTest);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
             case PerformancePackage.ENVIRONMENT: {
                 Environment environment = (Environment)theEObject;
                 T result = caseEnvironment(environment);
+                if (result == null) result = caseProperties(environment);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
             case PerformancePackage.SCENARIO: {
                 Scenario scenario = (Scenario)theEObject;
                 T result = caseScenario(scenario);
+                if (result == null) result = caseProperties(scenario);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case PerformancePackage.PROPERTIES: {
+                Properties properties = (Properties)theEObject;
+                T result = caseProperties(properties);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -124,6 +133,12 @@ public class PerformanceSwitch<T> {
             case PerformancePackage.TEST_RESULT: {
                 TestResult testResult = (TestResult)theEObject;
                 T result = caseTestResult(testResult);
+                if (result == null) result = defaultCase(theEObject);
+                return result;
+            }
+            case PerformancePackage.DATA_POINT: {
+                DataPoint dataPoint = (DataPoint)theEObject;
+                T result = caseDataPoint(dataPoint);
                 if (result == null) result = defaultCase(theEObject);
                 return result;
             }
@@ -183,6 +198,21 @@ public class PerformanceSwitch<T> {
     }
 
     /**
+     * Returns the result of interpreting the object as an instance of '<em>Properties</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Properties</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseProperties(Properties object) {
+        return null;
+    }
+
+    /**
      * Returns the result of interpreting the object as an instance of '<em>Property</em>'.
      * <!-- begin-user-doc -->
      * This implementation returns null;
@@ -224,6 +254,21 @@ public class PerformanceSwitch<T> {
      * @generated
      */
     public T caseTestResult(TestResult object) {
+        return null;
+    }
+
+    /**
+     * Returns the result of interpreting the object as an instance of '<em>Data Point</em>'.
+     * <!-- begin-user-doc -->
+     * This implementation returns null;
+     * returning a non-null result will terminate the switch.
+     * <!-- end-user-doc -->
+     * @param object the target of the switch.
+     * @return the result of interpreting the object as an instance of '<em>Data Point</em>'.
+     * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+     * @generated
+     */
+    public T caseDataPoint(DataPoint object) {
         return null;
     }
 

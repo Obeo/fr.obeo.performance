@@ -10,6 +10,7 @@
  */
 package fr.obeo.performance.impl;
 
+import fr.obeo.performance.DataPoint;
 import fr.obeo.performance.Measure;
 import fr.obeo.performance.PerformancePackage;
 import fr.obeo.performance.Scenario;
@@ -34,7 +35,7 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link fr.obeo.performance.impl.TestResultImpl#getScenario <em>Scenario</em>}</li>
- *   <li>{@link fr.obeo.performance.impl.TestResultImpl#getPerformance <em>Performance</em>}</li>
+ *   <li>{@link fr.obeo.performance.impl.TestResultImpl#getDataPoints <em>Data Points</em>}</li>
  * </ul>
  * </p>
  *
@@ -51,15 +52,14 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
      */
     protected Scenario scenario;
     /**
-     * The cached value of the '{@link #getPerformance() <em>Performance</em>}' reference list.
+     * The cached value of the '{@link #getDataPoints() <em>Data Points</em>}' reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see #getPerformance()
+     * @see #getDataPoints()
      * @generated
      * @ordered
      */
-    protected EList<Measure> performance;
-
+    protected EList<DataPoint> dataPoints;
     /**
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -127,11 +127,11 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Measure> getPerformance() {
-        if (performance == null) {
-            performance = new EObjectResolvingEList<Measure>(Measure.class, this, PerformancePackage.TEST_RESULT__PERFORMANCE);
+    public EList<DataPoint> getDataPoints() {
+        if (dataPoints == null) {
+            dataPoints = new EObjectResolvingEList<DataPoint>(DataPoint.class, this, PerformancePackage.TEST_RESULT__DATA_POINTS);
         }
-        return performance;
+        return dataPoints;
     }
 
     /**
@@ -158,8 +158,8 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
         switch (featureID) {
             case PerformancePackage.TEST_RESULT__SCENARIO:
                 return getScenario();
-            case PerformancePackage.TEST_RESULT__PERFORMANCE:
-                return getPerformance();
+            case PerformancePackage.TEST_RESULT__DATA_POINTS:
+                return getDataPoints();
         }
         return super.eGet(featureID, resolve, coreType);
     }
@@ -176,9 +176,9 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
             case PerformancePackage.TEST_RESULT__SCENARIO:
                 setScenario((Scenario)newValue);
                 return;
-            case PerformancePackage.TEST_RESULT__PERFORMANCE:
-                getPerformance().clear();
-                getPerformance().addAll((Collection<? extends Measure>)newValue);
+            case PerformancePackage.TEST_RESULT__DATA_POINTS:
+                getDataPoints().clear();
+                getDataPoints().addAll((Collection<? extends DataPoint>)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -195,8 +195,8 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
             case PerformancePackage.TEST_RESULT__SCENARIO:
                 setScenario((Scenario)null);
                 return;
-            case PerformancePackage.TEST_RESULT__PERFORMANCE:
-                getPerformance().clear();
+            case PerformancePackage.TEST_RESULT__DATA_POINTS:
+                getDataPoints().clear();
                 return;
         }
         super.eUnset(featureID);
@@ -212,8 +212,8 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
         switch (featureID) {
             case PerformancePackage.TEST_RESULT__SCENARIO:
                 return scenario != null;
-            case PerformancePackage.TEST_RESULT__PERFORMANCE:
-                return performance != null && !performance.isEmpty();
+            case PerformancePackage.TEST_RESULT__DATA_POINTS:
+                return dataPoints != null && !dataPoints.isEmpty();
         }
         return super.eIsSet(featureID);
     }

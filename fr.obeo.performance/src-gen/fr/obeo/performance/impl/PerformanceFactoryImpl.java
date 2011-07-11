@@ -71,6 +71,7 @@ public class PerformanceFactoryImpl extends EFactoryImpl implements PerformanceF
             case PerformancePackage.PROPERTY: return createProperty();
             case PerformancePackage.PERFORMANCE_TEST: return createPerformanceTest();
             case PerformancePackage.TEST_RESULT: return createTestResult();
+            case PerformancePackage.DATA_POINT: return createDataPoint();
             case PerformancePackage.MEASURE: return createMeasure();
             default:
                 throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -165,6 +166,16 @@ public class PerformanceFactoryImpl extends EFactoryImpl implements PerformanceF
     public TestResult createTestResult() {
         TestResultImpl testResult = new TestResultImpl();
         return testResult;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public DataPoint createDataPoint() {
+        DataPointImpl dataPoint = new DataPointImpl();
+        return dataPoint;
     }
 
     /**

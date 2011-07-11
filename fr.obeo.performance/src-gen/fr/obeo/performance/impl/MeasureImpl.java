@@ -84,14 +84,24 @@ public class MeasureImpl extends EObjectImpl implements Measure {
     protected Dimension dimension = DIMENSION_EDEFAULT;
 
     /**
-     * The cached value of the '{@link #getValue() <em>Value</em>}' attribute list.
+     * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see #getValue()
      * @generated
      * @ordered
      */
-    protected EList<Double> value;
+    protected static final double VALUE_EDEFAULT = 0.0;
+
+    /**
+     * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see #getValue()
+     * @generated
+     * @ordered
+     */
+    protected double value = VALUE_EDEFAULT;
 
     /**
      * <!-- begin-user-doc -->
@@ -159,11 +169,20 @@ public class MeasureImpl extends EObjectImpl implements Measure {
      * <!-- end-user-doc -->
      * @generated
      */
-    public EList<Double> getValue() {
-        if (value == null) {
-            value = new EDataTypeUniqueEList<Double>(Double.class, this, PerformancePackage.MEASURE__VALUE);
-        }
+    public double getValue() {
         return value;
+    }
+
+    /**
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    public void setValue(double newValue) {
+        double oldValue = value;
+        value = newValue;
+        if (eNotificationRequired())
+            eNotify(new ENotificationImpl(this, Notification.SET, PerformancePackage.MEASURE__VALUE, oldValue, value));
     }
 
     /**
@@ -200,8 +219,7 @@ public class MeasureImpl extends EObjectImpl implements Measure {
                 setDimension((Dimension)newValue);
                 return;
             case PerformancePackage.MEASURE__VALUE:
-                getValue().clear();
-                getValue().addAll((Collection<? extends Double>)newValue);
+                setValue((Double)newValue);
                 return;
         }
         super.eSet(featureID, newValue);
@@ -222,7 +240,7 @@ public class MeasureImpl extends EObjectImpl implements Measure {
                 setDimension(DIMENSION_EDEFAULT);
                 return;
             case PerformancePackage.MEASURE__VALUE:
-                getValue().clear();
+                setValue(VALUE_EDEFAULT);
                 return;
         }
         super.eUnset(featureID);
@@ -241,7 +259,7 @@ public class MeasureImpl extends EObjectImpl implements Measure {
             case PerformancePackage.MEASURE__DIMENSION:
                 return dimension != DIMENSION_EDEFAULT;
             case PerformancePackage.MEASURE__VALUE:
-                return value != null && !value.isEmpty();
+                return value != VALUE_EDEFAULT;
         }
         return super.eIsSet(featureID);
     }

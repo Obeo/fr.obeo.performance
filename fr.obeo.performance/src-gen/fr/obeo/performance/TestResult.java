@@ -59,7 +59,7 @@ public interface TestResult extends EObject {
     void setScenario(Scenario value);
 
     /**
-     * Returns the value of the '<em><b>Data Points</b></em>' reference list.
+     * Returns the value of the '<em><b>Data Points</b></em>' containment reference list.
      * The list contents are of type {@link fr.obeo.performance.DataPoint}.
      * <!-- begin-user-doc -->
      * <p>
@@ -67,9 +67,9 @@ public interface TestResult extends EObject {
      * there really should be more of a description here...
      * </p>
      * <!-- end-user-doc -->
-     * @return the value of the '<em>Data Points</em>' reference list.
+     * @return the value of the '<em>Data Points</em>' containment reference list.
      * @see fr.obeo.performance.PerformancePackage#getTestResult_DataPoints()
-     * @model
+     * @model containment="true"
      * @generated
      */
     EList<DataPoint> getDataPoints();

@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.EObjectImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 
 /**
@@ -52,7 +54,7 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
      */
     protected Scenario scenario;
     /**
-     * The cached value of the '{@link #getDataPoints() <em>Data Points</em>}' reference list.
+     * The cached value of the '{@link #getDataPoints() <em>Data Points</em>}' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @see #getDataPoints()
@@ -129,7 +131,7 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
      */
     public EList<DataPoint> getDataPoints() {
         if (dataPoints == null) {
-            dataPoints = new EObjectResolvingEList<DataPoint>(DataPoint.class, this, PerformancePackage.TEST_RESULT__DATA_POINTS);
+            dataPoints = new EObjectContainmentEList<DataPoint>(DataPoint.class, this, PerformancePackage.TEST_RESULT__DATA_POINTS);
         }
         return dataPoints;
     }
@@ -144,6 +146,8 @@ public class TestResultImpl extends EObjectImpl implements TestResult {
         switch (featureID) {
             case PerformancePackage.TEST_RESULT__SCENARIO:
                 return basicSetScenario(null, msgs);
+            case PerformancePackage.TEST_RESULT__DATA_POINTS:
+                return ((InternalEList<?>)getDataPoints()).basicRemove(otherEnd, msgs);
         }
         return super.eInverseRemove(otherEnd, featureID, msgs);
     }

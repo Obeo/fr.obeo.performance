@@ -306,7 +306,7 @@ public interface PerformancePackage extends EPackage {
     int TEST_RESULT__SCENARIO = 0;
 
     /**
-     * The feature id for the '<em><b>Data Points</b></em>' reference list.
+     * The feature id for the '<em><b>Data Points</b></em>' containment reference list.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -590,10 +590,10 @@ public interface PerformancePackage extends EPackage {
     EReference getTestResult_Scenario();
 
     /**
-     * Returns the meta object for the reference list '{@link fr.obeo.performance.TestResult#getDataPoints <em>Data Points</em>}'.
+     * Returns the meta object for the containment reference list '{@link fr.obeo.performance.TestResult#getDataPoints <em>Data Points</em>}'.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @return the meta object for the reference list '<em>Data Points</em>'.
+     * @return the meta object for the containment reference list '<em>Data Points</em>'.
      * @see fr.obeo.performance.TestResult#getDataPoints()
      * @see #getTestResult()
      * @generated
@@ -830,7 +830,7 @@ public interface PerformancePackage extends EPackage {
          */
         EReference TEST_RESULT__SCENARIO = eINSTANCE.getTestResult_Scenario();
         /**
-         * The meta object literal for the '<em><b>Data Points</b></em>' reference list feature.
+         * The meta object literal for the '<em><b>Data Points</b></em>' containment reference list feature.
          * <!-- begin-user-doc -->
          * <!-- end-user-doc -->
          * @generated

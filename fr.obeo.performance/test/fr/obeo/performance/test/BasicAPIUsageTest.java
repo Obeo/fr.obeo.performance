@@ -8,18 +8,26 @@
  */
 package fr.obeo.performance.test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fr.obeo.performance.DataPoint;
-import fr.obeo.performance.Dimension;
-import fr.obeo.performance.Measure;
-import fr.obeo.performance.TestResult;
+import com.google.common.collect.Lists;
+
+import fr.obeo.performance.PerformancePackage;
 import fr.obeo.performance.api.PerformanceMonitor;
+import fr.obeo.performance.api.PerformanceTestSuite;
+import fr.obeo.performance.api.PropertiesHelper;
 
 /**
  * A basic test which tests nothing but serves as an example of how to use the
@@ -28,36 +36,49 @@ import fr.obeo.performance.api.PerformanceMonitor;
  * @author pierre-charles.david@obeo.fr
  */
 public class BasicAPIUsageTest {
+    private static final int ITERATIONS = 3;
+    private static final int BLOCK_SIZE = 4096 * 1000;
 
-    private static final int TIMES = 10;
+    private static PerformanceTestSuite suite;
+    private static String timestamp;
 
-    @Test
-    public void some_performance_sensitive_work() {
-        PerformanceMonitor monitor = new PerformanceMonitor("Basic test");
-        for (int i = 0; i < TIMES; i++) {
-            monitor.start();
-            doSomeWork();
-            monitor.stop();
-        }
-        TestResult result = monitor.commit();
-        assertNotNull(result);
-        assertEquals("Basic test", result.getScenario().getName());
-        EList<DataPoint> data = result.getDataPoints();
-        assertEquals(TIMES, data.size());
-        for (DataPoint dataPoint : data) {
-            assertEquals(4, dataPoint.getMeasures().size());
-            Measure m = dataPoint.getMeasures().get(0);
-            assertEquals("system_time", m.getName());
-            assertEquals(Dimension.TIME, m.getDimension());
-            assertTrue(m.getValue() > 500.0 * 1000);
+    private List<byte[]> blocks = Lists.newArrayList();
+
+    @BeforeClass
+    public static void configure() {
+        initializeEMF();
+        suite = new PerformanceTestSuite("Basic API");
+        timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date());
+        PropertiesHelper.add(suite.getSystemUnderTest(), "timestamp", timestamp);
+        PropertiesHelper.add(suite.getSystemUnderTest(), "version", "trunk@1234");
+        PropertiesHelper.add(suite.getSystemUnderTest(), "features_present", "core,diagram,table,tree");
+        
+    }
+    
+    @AfterClass
+    public static void saveResults() throws IOException {
+        suite.save(URI.createFileURI("/tmp/test-" + timestamp + ".performance"));
+    }
+
+    private static void initializeEMF() {
+        if (!EMFPlugin.IS_ECLIPSE_RUNNING) {
+            @SuppressWarnings("unused")
+            EPackage perf = PerformancePackage.eINSTANCE;
+            Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("performance", new XMIResourceFactoryImpl());
         }
     }
 
-    private void doSomeWork() {
-        try {
-            Thread.sleep(500);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    @Test
+    public void wait_and_allocate_some_memory() throws IOException, InterruptedException {
+        PerformanceMonitor monitor = suite.createMonitor("wait_and_allocate_some_memory");
+        PropertiesHelper.add(monitor.getScenario(), "nb_iterations", String.valueOf(ITERATIONS));
+        PropertiesHelper.add(monitor.getScenario(), "block_size", String.valueOf(BLOCK_SIZE));
+        for (int i = 0; i < ITERATIONS; i++) {
+            monitor.start();
+            Thread.sleep(200);
+            blocks.add(new byte[BLOCK_SIZE]);
+            monitor.stop();
         }
+        monitor.commit();
     }
 }

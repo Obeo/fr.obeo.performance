@@ -31,23 +31,21 @@ public class PerformanceMonitor {
     }
 
     private final TestResult testResult;
+    
+    private final PerformanceTestSuite suite;
 
     private final List<PerformanceMeter> meters = Lists.newArrayList();
 
     private State currentState;
 
-    public PerformanceMonitor(String scenarioName) {
-        this(scenarioName, "");
-    }
-
-    public PerformanceMonitor(String scenarioName, String description) {
+    public PerformanceMonitor(String scenarioName, PerformanceTestSuite performanceTestSuite) {
         this.testResult = PerformanceFactory.eINSTANCE.createTestResult();
         Scenario scenario = PerformanceFactory.eINSTANCE.createScenario();
         scenario.setName(scenarioName);
-        scenario.setDescription(description);
         this.testResult.setScenario(scenario);
         this.meters.add(new TimeMeter());
         this.meters.add(new MemoryMeter());
+        this.suite = performanceTestSuite;
         this.currentState = State.READY;
     }
 
@@ -79,6 +77,9 @@ public class PerformanceMonitor {
     public TestResult commit() {
         Preconditions.checkState(currentState == State.READY);
         currentState = State.CLOSED;
+        if (suite != null) {
+            suite.collect(testResult);
+        }
         return testResult;
     }
 }

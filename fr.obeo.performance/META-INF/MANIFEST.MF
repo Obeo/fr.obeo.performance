@@ -8,6 +8,7 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: fr.obeo.performance,
+ fr.obeo.performance.api,
  fr.obeo.performance.impl,
  fr.obeo.performance.util
 Require-Bundle: org.eclipse.core.runtime,

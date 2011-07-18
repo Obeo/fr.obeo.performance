@@ -26,12 +26,17 @@ import fr.obeo.performance.TestResult;
  * @author pierre-charles.david@obeo.fr
  */
 public class PerformanceMonitor {
+    /**
+     * The possible runtime states of a monitor.
+     * 
+     * @author pierre-charles.david@obeo.fr
+     */
     private enum State {
         READY, RUNNING, CLOSED
     }
 
     private final TestResult testResult;
-    
+
     private final PerformanceTestSuite suite;
 
     private final List<PerformanceMeter> meters = Lists.newArrayList();
@@ -43,10 +48,14 @@ public class PerformanceMonitor {
         Scenario scenario = PerformanceFactory.eINSTANCE.createScenario();
         scenario.setName(scenarioName);
         this.testResult.setScenario(scenario);
-        this.meters.add(new TimeMeter());
-        this.meters.add(new MemoryMeter());
         this.suite = performanceTestSuite;
         this.currentState = State.READY;
+        configureMeters();
+    }
+
+    protected void configureMeters() {
+        this.meters.add(new TimeMeter());
+        this.meters.add(new MemoryMeter());
     }
 
     public Scenario getScenario() {
@@ -81,5 +90,24 @@ public class PerformanceMonitor {
             suite.collect(testResult);
         }
         return testResult;
+    }
+    
+    public void measure(int steps, Runnable body) {
+        measure(true, steps, body);
+    }
+
+    public void measure(boolean warmup, int steps, Runnable body) {
+        Preconditions.checkArgument(steps > 0);
+        Preconditions.checkNotNull(body);
+        PropertiesHelper.add(getScenario(), "steps", String.valueOf(steps));
+        if (warmup) {
+            body.run();
+        }
+        for (int i = 0; i < steps; i++) {
+            start();
+            body.run();
+            stop();
+        }
+        commit();
     }
 }

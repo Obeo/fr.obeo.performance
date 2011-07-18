@@ -37,9 +37,11 @@ import fr.obeo.performance.api.PropertiesHelper;
  */
 public class BasicAPIUsageTest {
     private static final int ITERATIONS = 3;
+
     private static final int BLOCK_SIZE = 4096 * 1000;
 
     private static PerformanceTestSuite suite;
+
     private static String timestamp;
 
     private List<byte[]> blocks = Lists.newArrayList();
@@ -51,10 +53,8 @@ public class BasicAPIUsageTest {
         timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date());
         PropertiesHelper.add(suite.getSystemUnderTest(), "timestamp", timestamp);
         PropertiesHelper.add(suite.getSystemUnderTest(), "version", "trunk@1234");
-        PropertiesHelper.add(suite.getSystemUnderTest(), "features_present", "core,diagram,table,tree");
-        
     }
-    
+
     @AfterClass
     public static void saveResults() throws IOException {
         suite.save(URI.createFileURI("/tmp/test-" + timestamp + ".performance"));
@@ -71,14 +71,16 @@ public class BasicAPIUsageTest {
     @Test
     public void wait_and_allocate_some_memory() throws IOException, InterruptedException {
         PerformanceMonitor monitor = suite.createMonitor("wait_and_allocate_some_memory");
-        PropertiesHelper.add(monitor.getScenario(), "nb_iterations", String.valueOf(ITERATIONS));
         PropertiesHelper.add(monitor.getScenario(), "block_size", String.valueOf(BLOCK_SIZE));
-        for (int i = 0; i < ITERATIONS; i++) {
-            monitor.start();
-            Thread.sleep(200);
-            blocks.add(new byte[BLOCK_SIZE]);
-            monitor.stop();
-        }
-        monitor.commit();
+        monitor.measure(false, ITERATIONS, new Runnable() {
+            public void run() {
+                try {
+                    Thread.sleep(200);
+                } catch (InterruptedException e) {
+                    // Ignore.
+                }
+                blocks.add(new byte[BLOCK_SIZE]);
+            }
+        });
     }
 }

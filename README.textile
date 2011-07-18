@@ -21,10 +21,21 @@ for (int i = 0; i < ITERATIONS; i++) {
 }
 // This marks the end of the scenario
 monitor.commit();
+// Alternatively, you can use:
+monitor.measure(ITERATIONS, new Runnable() {
+  public void run() {
+    doSomething();
+  }
+};
 // Repeat with other monitors if you have more scenarios
 // Finally save the result:
 suite.save(URI.createFileURI("/tmp/test.performance"));
 
+
+h2. Dependencies
+
+* EMF (but not Eclipse)
+* Google Collections 1.0 (or Guava)
 
 h2. License
 

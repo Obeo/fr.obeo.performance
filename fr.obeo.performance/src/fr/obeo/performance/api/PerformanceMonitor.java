@@ -37,13 +37,13 @@ public class PerformanceMonitor {
 
     private final TestResult testResult;
 
-    private final PerformanceTestSuite suite;
+    private final Performance suite;
 
     private final List<PerformanceMeter> meters = Lists.newArrayList();
 
     private State currentState;
 
-    public PerformanceMonitor(String scenarioName, PerformanceTestSuite performanceTestSuite) {
+    public PerformanceMonitor(String scenarioName, Performance performanceTestSuite) {
         this.testResult = PerformanceFactory.eINSTANCE.createTestResult();
         Scenario scenario = PerformanceFactory.eINSTANCE.createScenario();
         scenario.setName(scenarioName);

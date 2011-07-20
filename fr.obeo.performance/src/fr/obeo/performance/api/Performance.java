@@ -29,10 +29,10 @@ import fr.obeo.performance.TestResult;
  * The top-level API to use to manage performance test suites.
  * @author pierre-charles.david@obeo.fr
  */
-public class PerformanceTestSuite {
+public class Performance {
     private final PerformanceTest test;
     
-    public PerformanceTestSuite(String sutName) {
+    public Performance(String sutName) {
         test = PerformanceFactory.eINSTANCE.createPerformanceTest();
         SystemUnderTest sut = PerformanceFactory.eINSTANCE.createSystemUnderTest();
         sut.setName(sutName);

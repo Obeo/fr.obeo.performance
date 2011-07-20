@@ -26,7 +26,7 @@ import com.google.common.collect.Lists;
 
 import fr.obeo.performance.PerformancePackage;
 import fr.obeo.performance.api.PerformanceMonitor;
-import fr.obeo.performance.api.PerformanceTestSuite;
+import fr.obeo.performance.api.Performance;
 import fr.obeo.performance.api.PropertiesHelper;
 
 /**
@@ -40,7 +40,7 @@ public class BasicAPIUsageTest {
 
     private static final int BLOCK_SIZE = 4096 * 1000;
 
-    private static PerformanceTestSuite suite;
+    private static Performance suite;
 
     private static String timestamp;
 
@@ -49,7 +49,7 @@ public class BasicAPIUsageTest {
     @BeforeClass
     public static void configure() {
         initializeEMF();
-        suite = new PerformanceTestSuite("Basic API");
+        suite = new Performance("Basic API");
         timestamp = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").format(new Date());
         PropertiesHelper.add(suite.getSystemUnderTest(), "timestamp", timestamp);
         PropertiesHelper.add(suite.getSystemUnderTest(), "version", "trunk@1234");

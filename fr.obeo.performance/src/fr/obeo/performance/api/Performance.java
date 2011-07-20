@@ -30,6 +30,16 @@ import fr.obeo.performance.TestResult;
  * @author pierre-charles.david@obeo.fr
  */
 public class Performance {
+    private static Performance current;
+    
+    public static Performance getCurrent() {
+        return current;
+    }
+    
+    public static void setCurrent(Performance current) {
+        Performance.current = current;
+    }
+    
     private final PerformanceTest test;
     
     public Performance(String sutName) {

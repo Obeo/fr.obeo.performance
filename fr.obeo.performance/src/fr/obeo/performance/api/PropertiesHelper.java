@@ -25,6 +25,15 @@ public class PropertiesHelper {
         prop.getProperties().add(p);
     }
     
+    public static void set(Properties prop, String key, String value) {
+        Property existing = PropertiesHelper.find(prop, key);
+        if (existing == null) {
+            PropertiesHelper.add(prop, key, value);
+        } else {
+            existing.setValue(value);
+        }
+    }
+    
     public static String getValue(Properties prop, String key) {
         Property p = find(prop, key);
         if (p != null) {

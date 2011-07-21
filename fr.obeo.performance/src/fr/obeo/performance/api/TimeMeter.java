@@ -10,6 +10,7 @@ package fr.obeo.performance.api;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 import fr.obeo.performance.Dimension;
 import fr.obeo.performance.Measure;
@@ -38,7 +39,8 @@ public class TimeMeter extends PerformanceMeter {
 
     @Override
     public Collection<Measure> getResults() {
-        return Collections.singleton(createMeasure("system_time", Dimension.TIME, (double) (stopTime - startTime)));
+        long nanos = stopTime - startTime;
+        return Collections.singleton(createMeasure("system_time", Dimension.TIME, (double) TimeUnit.NANOSECONDS.toMillis(nanos)));
     }
 
     private long now() {

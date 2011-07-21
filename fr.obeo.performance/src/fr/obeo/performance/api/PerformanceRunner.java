@@ -210,10 +210,15 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
             }
 
             private void injectMonitor(final Object test, PerformanceMonitor monitor) throws IllegalAccessException {
-                List<FrameworkField> annotatedFields = getTestClass().getAnnotatedFields(Monitor.class);
-                for (FrameworkField field : annotatedFields) {
-                    if (field.getField().getType().isAssignableFrom(PerformanceMonitor.class) && field.getField().isAccessible()) {
-                        field.getField().set(test, monitor);
+                List<FrameworkMethod> annotatedMethods = getTestClass().getAnnotatedMethods(Monitor.class);
+                for (FrameworkMethod method : annotatedMethods) {
+                    Class<?>[] params = method.getMethod().getParameterTypes();
+                    if (params.length == 1 && params[0].isAssignableFrom(PerformanceMonitor.class)) {
+                        try {
+                            method.invokeExplosively(test, new Object[] { monitor });
+                        } catch (Throwable e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

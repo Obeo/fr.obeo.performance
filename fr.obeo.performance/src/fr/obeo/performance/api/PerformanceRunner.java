@@ -10,6 +10,7 @@
  */
 package fr.obeo.performance.api;
 
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,23 +20,47 @@ import org.junit.internal.runners.statements.Fail;
 import org.junit.internal.runners.statements.InvokeMethod;
 import org.junit.rules.MethodRule;
 import org.junit.runners.BlockJUnit4ClassRunner;
+import org.junit.runners.Parameterized.Parameters;
+import org.junit.runners.model.FrameworkField;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
+import org.junit.runners.model.TestClass;
 
+import com.google.common.collect.Lists;
+
+import fr.obeo.performance.api.annotation.Monitor;
 import fr.obeo.performance.api.annotation.Scenario;
 
 public class PerformanceRunner extends BlockJUnit4ClassRunner {
-    private final class ScenarioStatement extends Statement {
-        private final Statement basicStatement;
+    private static class CompositeStatement extends Statement {
+        private final List<Statement> steps;
 
-        private final Scenario scenario;
+        public CompositeStatement(List<Statement> steps) {
+            this.steps = steps;
+        }
+
+        @Override
+        public void evaluate() throws Throwable {
+            for (Statement s : steps) {
+                s.evaluate();
+            }
+        }
+    }
+
+    private static final class PerformanceStatement extends Statement {
+        /**
+         * The non-monitored statement, used for the optional warm-up execution.
+         */
+        private Statement basicStatement;
+
+        private Scenario scenario;
 
         private Statement[] monitoredStatements;
 
         private PerformanceMonitor monitor;
 
-        private ScenarioStatement(Statement basicStatement, Scenario scenario) {
+        private PerformanceStatement(Statement basicStatement, Scenario scenario) {
             this.basicStatement = basicStatement;
             this.scenario = scenario;
         }
@@ -66,6 +91,26 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
     }
 
     @Override
+    protected void validateConstructor(List<Throwable> errors) {
+        validateOnlyOneConstructor(errors);
+        if (getParametersMethod(getTestClass()) != null) {
+            List<Object[]> params = getParametersList(getTestClass());
+            if (params != null && !params.isEmpty()) {
+                int nbParams = params.get(0).length;
+                if (getTestClass().getJavaClass().getConstructors().length == 1 && !(getTestClass().getOnlyConstructor().getParameterTypes().length == nbParams)) {
+                    String gripe = "Test class should have exactly one public constructor taking " + nbParams + " arguments";
+                    errors.add(new Exception(gripe));
+                }
+            } else {
+                validateZeroArgConstructor(errors);
+            }
+
+        } else {
+            validateZeroArgConstructor(errors);
+        }
+    }
+
+    @Override
     protected List<FrameworkMethod> computeTestMethods() {
         List<FrameworkMethod> result = new ArrayList<FrameworkMethod>();
         result.addAll(getTestClass().getAnnotatedMethods(Scenario.class));
@@ -79,18 +124,25 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
 
     @Override
     protected Statement methodBlock(FrameworkMethod method) {
+        final List<Object[]> parameters = getParametersList(getTestClass());
+        if (parameters == null) {
+            return createStatement(method, null);
+        } else {
+            List<Statement> steps = Lists.newArrayList();
+            for (Object[] params : parameters) {
+                steps.add(createStatement(method, params));
+            }
+            return new CompositeStatement(steps);
+        }
+    }
+
+    private Statement createStatement(FrameworkMethod method, Object[] params) {
         final Scenario scenario = method.getAnnotation(Scenario.class);
         final int testsNeeded = scenario == null ? 1 : ((scenario.warmup() ? 1 : 0) + scenario.iterations());
-
         Object[] tests = new Object[testsNeeded];
         for (int i = 0; i < tests.length; i++) {
             try {
-                tests[i] = new ReflectiveCallable() {
-                    @Override
-                    protected Object runReflectiveCall() throws Throwable {
-                        return createTest();
-                    }
-                }.run();
+                tests[i] = createTest(params);
             } catch (Throwable e) {
                 return new Fail(e);
             }
@@ -100,7 +152,7 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
         if (scenario == null) {
             return basicStatement;
         } else {
-            ScenarioStatement ss = new ScenarioStatement(basicStatement, scenario);
+            PerformanceStatement ss = new PerformanceStatement(basicStatement, scenario);
             final Statement[] monitoredStatement = new Statement[scenario.iterations()];
             for (int i = 0; i < scenario.iterations(); i++) {
                 monitoredStatement[i] = createMonitoredStatement(method, tests[i + (scenario.warmup() ? 1 : 0)], ss);
@@ -110,13 +162,21 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
         }
     }
 
+    protected Object createTest(Object[] params) throws Exception {
+        if (params == null) {
+            return getTestClass().getOnlyConstructor().newInstance();
+        } else {
+            return getTestClass().getOnlyConstructor().newInstance(params);
+        }
+    }
+
     private Statement createBasicStatement(FrameworkMethod method, Object test) {
         Statement basicStatement = methodInvoker(method, test);
         basicStatement = decorate(method, test, basicStatement);
         return basicStatement;
     }
 
-    private Statement createMonitoredStatement(FrameworkMethod method, Object test, ScenarioStatement ss) {
+    private Statement createMonitoredStatement(FrameworkMethod method, Object test, PerformanceStatement ss) {
         Statement monitoredStatement = monitoredMethodInvoker(method, test, ss);
         monitoredStatement = decorate(method, test, monitoredStatement);
         return monitoredStatement;
@@ -138,14 +198,50 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
         return result;
     }
 
-    protected Statement monitoredMethodInvoker(FrameworkMethod method, Object test, final ScenarioStatement ss) {
+    protected Statement monitoredMethodInvoker(FrameworkMethod method, final Object test, final PerformanceStatement ss) {
         return new InvokeMethod(method, test) {
             @Override
             public void evaluate() throws Throwable {
-                ss.getMonitor().start();
+                PerformanceMonitor monitor = ss.getMonitor();
+                injectMonitor(test, monitor);
+                monitor.start();
                 super.evaluate();
-                ss.getMonitor().stop();
+                monitor.stop();
+            }
+
+            private void injectMonitor(final Object test, PerformanceMonitor monitor) throws IllegalAccessException {
+                List<FrameworkField> annotatedFields = getTestClass().getAnnotatedFields(Monitor.class);
+                for (FrameworkField field : annotatedFields) {
+                    if (field.getField().getType().isAssignableFrom(PerformanceMonitor.class) && field.getField().isAccessible()) {
+                        field.getField().set(test, monitor);
+                    }
+                }
             }
         };
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<Object[]> getParametersList(TestClass klass) {
+        try {
+            FrameworkMethod parametersMethod = getParametersMethod(klass);
+            if (parametersMethod != null) {
+                return (List<Object[]>) parametersMethod.invokeExplosively(null);
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            return null;
+        } catch (Throwable e) {
+            return null;
+        }
+    }
+
+    private FrameworkMethod getParametersMethod(TestClass testClass) {
+        for (FrameworkMethod method : testClass.getAnnotatedMethods(Parameters.class)) {
+            int modifiers = method.getMethod().getModifiers();
+            if (Modifier.isStatic(modifiers) && Modifier.isPublic(modifiers))
+                return method;
+        }
+        return null;
     }
 }

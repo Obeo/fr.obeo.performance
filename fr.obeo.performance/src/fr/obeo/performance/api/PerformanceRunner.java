@@ -26,7 +26,6 @@ import org.junit.runners.model.Statement;
 import fr.obeo.performance.api.annotation.Scenario;
 
 public class PerformanceRunner extends BlockJUnit4ClassRunner {
-
     private final class ScenarioStatement extends Statement {
         private final Statement basicStatement;
 

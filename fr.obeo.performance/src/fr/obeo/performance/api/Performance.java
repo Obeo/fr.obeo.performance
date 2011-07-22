@@ -17,8 +17,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 
-import com.google.common.collect.Iterables;
-
 import fr.obeo.performance.Environment;
 import fr.obeo.performance.PerformanceFactory;
 import fr.obeo.performance.PerformanceTest;
@@ -79,8 +77,10 @@ public class Performance {
 
     private void setupEnvironment(PerformanceTest pt) {
         Environment env = PerformanceFactory.eINSTANCE.createEnvironment();
-        for (String  key : Iterables.filter(System.getProperties().keySet(), String.class)) {
-            PropertiesHelper.add(env, "jvm." + key, System.getProperty(key));
+        for (Object key : System.getProperties().keySet()) {
+            if (key instanceof String) {
+                PropertiesHelper.add(env, "jvm." + key, System.getProperty((String) key));
+            }
         }
         for (String key : System.getenv().keySet()) {
             PropertiesHelper.add(env, "env." + key, System.getenv(key));

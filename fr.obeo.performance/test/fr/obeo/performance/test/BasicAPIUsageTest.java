@@ -9,6 +9,7 @@
 package fr.obeo.performance.test;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,8 +20,6 @@ import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized.Parameters;
-
-import com.google.common.collect.Lists;
 
 import fr.obeo.performance.PerformancePackage;
 import fr.obeo.performance.api.PerformanceRunner;
@@ -34,7 +33,7 @@ import fr.obeo.performance.api.annotation.Scenario;
  */
 @RunWith(PerformanceRunner.class)
 public class BasicAPIUsageTest {
-    private List<byte[]> blocks = Lists.newArrayList();
+    private List<byte[]> blocks = new ArrayList<byte[]>();
 
     private int blockSize;
     

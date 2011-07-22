@@ -35,7 +35,6 @@ suite.save(URI.createFileURI("/tmp/test.performance"));
 h2. Dependencies
 
 * EMF (but not Eclipse)
-* Google Collections 1.0 (or Guava)
 
 h2. License
 

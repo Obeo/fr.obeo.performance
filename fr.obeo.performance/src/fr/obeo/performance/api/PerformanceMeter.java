@@ -11,8 +11,6 @@ package fr.obeo.performance.api;
 
 import java.util.Collection;
 
-import com.google.common.base.Preconditions;
-
 import fr.obeo.performance.Dimension;
 import fr.obeo.performance.Measure;
 import fr.obeo.performance.PerformanceFactory;
@@ -29,12 +27,16 @@ public abstract class PerformanceMeter {
     protected boolean running = false;
 
     public void start() {
-        Preconditions.checkState(!running);
+        if (running) {
+            throw new IllegalStateException();
+        }
         this.running = true;
     }
 
     public void stop() {
-        Preconditions.checkState(running);
+        if (!running) {
+            throw new IllegalStateException();
+        }
         this.running = false;
     }
     

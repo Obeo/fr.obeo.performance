@@ -10,10 +10,8 @@
  */
 package fr.obeo.performance.api;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 
 import fr.obeo.performance.DataPoint;
 import fr.obeo.performance.PerformanceFactory;
@@ -39,7 +37,7 @@ public class PerformanceMonitor {
 
     private final Performance suite;
 
-    private final List<PerformanceMeter> meters = Lists.newArrayList();
+    private final List<PerformanceMeter> meters = new ArrayList<PerformanceMeter>();
 
     private State currentState;
 
@@ -63,7 +61,9 @@ public class PerformanceMonitor {
     }
 
     public void start() {
-        Preconditions.checkState(currentState == State.READY);
+        if (currentState != State.READY) {
+            throw new IllegalStateException();
+        }
         for (PerformanceMeter meter : meters) {
             meter.start();
         }
@@ -71,7 +71,9 @@ public class PerformanceMonitor {
     }
 
     public void stop() {
-        Preconditions.checkState(currentState == State.RUNNING);
+        if (currentState != State.RUNNING) {
+            throw new IllegalStateException();
+        }
         for (PerformanceMeter meter : meters) {
             meter.stop();
         }
@@ -84,7 +86,9 @@ public class PerformanceMonitor {
     }
 
     public TestResult commit() {
-        Preconditions.checkState(currentState == State.READY);
+        if (currentState != State.READY) {
+            throw new IllegalStateException();
+        }
         currentState = State.CLOSED;
         if (suite != null) {
             suite.collect(testResult);
@@ -97,8 +101,9 @@ public class PerformanceMonitor {
     }
 
     public void measure(boolean warmup, int steps, Runnable body) {
-        Preconditions.checkArgument(steps > 0);
-        Preconditions.checkNotNull(body);
+        if (steps <= 0 || body == null) {
+            throw new IllegalArgumentException();
+        }
         PropertiesHelper.add(getScenario(), "steps", String.valueOf(steps));
         if (warmup) {
             body.run();

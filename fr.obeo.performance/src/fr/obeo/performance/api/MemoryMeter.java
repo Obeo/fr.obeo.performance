@@ -8,9 +8,8 @@
  */
 package fr.obeo.performance.api;
 
+import java.util.ArrayList;
 import java.util.Collection;
-
-import com.google.common.collect.Lists;
 
 import fr.obeo.performance.Dimension;
 import fr.obeo.performance.Measure;
@@ -37,7 +36,7 @@ public class MemoryMeter extends PerformanceMeter {
 
     @Override
     public Collection<Measure> getResults() {
-        Collection<Measure> result = Lists.newArrayList();
+        Collection<Measure> result = new ArrayList<Measure>();
         double heapStart = (double) (startTotal - startFree);
         double heapStop = (double) (stopTotal - stopFree);
         double heapDelta = heapStop - heapStart;

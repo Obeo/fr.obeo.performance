@@ -15,19 +15,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.internal.runners.model.ReflectiveCallable;
 import org.junit.internal.runners.statements.Fail;
 import org.junit.internal.runners.statements.InvokeMethod;
 import org.junit.rules.MethodRule;
 import org.junit.runners.BlockJUnit4ClassRunner;
 import org.junit.runners.Parameterized.Parameters;
-import org.junit.runners.model.FrameworkField;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
-
-import com.google.common.collect.Lists;
 
 import fr.obeo.performance.api.annotation.Monitor;
 import fr.obeo.performance.api.annotation.Scenario;
@@ -128,7 +124,7 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
         if (parameters == null) {
             return createStatement(method, null);
         } else {
-            List<Statement> steps = Lists.newArrayList();
+            List<Statement> steps = new ArrayList<Statement>();
             for (Object[] params : parameters) {
                 steps.add(createStatement(method, params));
             }

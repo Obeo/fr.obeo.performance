@@ -108,6 +108,7 @@ public class TestResultItemProvider
         if (childrenFeatures == null) {
             super.getChildrenFeatures(object);
             childrenFeatures.add(PerformancePackage.Literals.TEST_RESULT__SCENARIO);
+            childrenFeatures.add(PerformancePackage.Literals.TEST_RESULT__DATA_POINTS);
         }
         return childrenFeatures;
     }
@@ -181,6 +182,11 @@ public class TestResultItemProvider
             (createChildParameter
                 (PerformancePackage.Literals.TEST_RESULT__SCENARIO,
                  PerformanceFactory.eINSTANCE.createScenario()));
+
+        newChildDescriptors.add
+            (createChildParameter
+                (PerformancePackage.Literals.TEST_RESULT__DATA_POINTS,
+                 PerformanceFactory.eINSTANCE.createDataPoint()));
     }
 
     /**

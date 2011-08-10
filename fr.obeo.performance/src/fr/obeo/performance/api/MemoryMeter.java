@@ -8,6 +8,9 @@
  */
 package fr.obeo.performance.api;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryPoolMXBean;
+import java.lang.management.MemoryUsage;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -15,34 +18,54 @@ import fr.obeo.performance.Dimension;
 import fr.obeo.performance.Measure;
 
 public class MemoryMeter extends PerformanceMeter {
-    private long startTotal;
-    private long startFree;
-    private long stopTotal;
-    private long stopFree;
+	private long startUsage;
+	private long stopUsage;
+	private long peekUsage;
 
-    @Override
-    public void start() {
-        super.start();
-        this.startTotal = Runtime.getRuntime().totalMemory();
-        this.startFree = Runtime.getRuntime().freeMemory();
-    }
+	@Override
+	public void start() {
+		super.start();
+		startUsage = getMemUsage();
+		resetPeek();
+	}
 
-    @Override
-    public void stop() {
-        super.stop();
-        this.stopTotal = Runtime.getRuntime().totalMemory();
-        this.stopFree = Runtime.getRuntime().freeMemory();
-    }
+	private void resetPeek() {
+		for (MemoryPoolMXBean mpool : ManagementFactory.getMemoryPoolMXBeans()) {
+			mpool.resetPeakUsage();
+		}
+	}
 
-    @Override
-    public Collection<Measure> getResults() {
-        Collection<Measure> result = new ArrayList<Measure>();
-        double heapStart = (double) (startTotal - startFree);
-        double heapStop = (double) (stopTotal - stopFree);
-        double heapDelta = heapStop - heapStart;
-        result.add(createMeasure("heap_start", Dimension.MEMORY, heapStart));
-        result.add(createMeasure("heap_stop", Dimension.MEMORY, heapStop));
-        result.add(createMeasure("heap_delta", Dimension.MEMORY, heapDelta));
-        return result;
-    }
+	private long getMemUsage() {
+		long usageAmount = 0;
+		for (MemoryPoolMXBean mpool : ManagementFactory.getMemoryPoolMXBeans()) {
+			MemoryUsage usage = mpool.getUsage();
+			usageAmount += usage.getUsed();
+		}
+		return usageAmount;
+	}
+
+	private long getPeekUsage() {
+		long usageAmount = 0;
+		for (MemoryPoolMXBean mpool : ManagementFactory.getMemoryPoolMXBeans()) {
+			MemoryUsage usage = mpool.getPeakUsage();
+			usageAmount += usage.getUsed();
+		}
+		return usageAmount;
+	}
+
+	@Override
+	public void stop() {
+		super.stop();
+		stopUsage = getMemUsage();
+		peekUsage = getPeekUsage();
+	}
+
+	@Override
+	public Collection<Measure> getResults() {
+		Collection<Measure> result = new ArrayList<Measure>();
+		double heapDelta = stopUsage - startUsage;
+		result.add(createMeasure("heap_peek", Dimension.MEMORY, peekUsage));
+		result.add(createMeasure("heap_delta", Dimension.MEMORY, heapDelta));
+		return result;
+	}
 }

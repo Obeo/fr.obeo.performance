@@ -74,11 +74,14 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
             if (scenario.warmup()) {
                 basicStatement.evaluate();
             }
-            monitor = Performance.getCurrent().createMonitor(scenario.value());
-            for (int i = 0; i < scenario.iterations(); i++) {
-                monitoredStatements[i].evaluate();
+            Performance currentPerf = Performance.getCurrent();
+            if (currentPerf != null) {
+                monitor = currentPerf.createMonitor(scenario.value());
+                for (int i = 0; i < scenario.iterations(); i++) {
+                    monitoredStatements[i].evaluate();
+                }
+                monitor.commit();
             }
-            monitor.commit();
         }
     }
 

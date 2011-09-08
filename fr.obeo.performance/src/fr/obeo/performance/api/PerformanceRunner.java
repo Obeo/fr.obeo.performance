@@ -206,10 +206,16 @@ public class PerformanceRunner extends BlockJUnit4ClassRunner {
             @Override
             public void evaluate() throws Throwable {
                 PerformanceMonitor monitor = ss.getMonitor();
-                injectMonitor(test, monitor);
-                monitor.start();
+                if (monitor != null) {
+                    injectMonitor(test, monitor);
+                    monitor.start();
+                }
+                
                 super.evaluate();
-                monitor.stop();
+                
+                if (monitor != null) {
+                    monitor.stop();
+                }
             }
 
             private void injectMonitor(final Object test, PerformanceMonitor monitor) throws IllegalAccessException {

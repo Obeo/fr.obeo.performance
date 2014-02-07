@@ -1,9 +1,0 @@
-Some references on the web:
-* "http://en.wikipedia.org/wiki/Software_performance_testing":http://en.wikipedia.org/wiki/Software_performance_testing
-
-Existing projects:
-* @org.eclipse.test.performance@, see @:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse/org.eclipse.test.performance@ and @:pserver:anonymous@dev.eclipse.org:/cvsroot/eclipse/org.eclipse.releng.basebuilder/plugins/org.eclipse.test.performance.ui@ for the reporting tools. Unfortunately, the reporting tools are very specific to the Eclipse platform organization and infrastructure, and the raw data is stored in a SQL database, so not as easy to exploit for us than EMF models.
-* "Apache JMeter":http://jakarta.apache.org/jmeter/, mostly designed for web apps.
-* More at "http://www.opensourcetesting.org/performance.php":http://www.opensourcetesting.org/performance.php
-* "https://github.com/codahale/metrics":https://github.com/codahale/metrics
-* "https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin":https://wiki.jenkins-ci.org/display/JENKINS/Performance+Plugin
